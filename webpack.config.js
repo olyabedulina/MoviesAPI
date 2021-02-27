@@ -53,7 +53,20 @@ module.exports = (env = {}) => ({
                         },
                     }
                 },
-                'postcss-loader'
+                {
+                    loader: "postcss-loader",
+                    options: {
+                        postcssOptions: {
+                            plugins: [
+                                [
+                                    "postcss-preset-env",
+                                    {
+                                        // Options
+                                    },
+                                ],
+                            ],
+                        },
+                    }
             ]
             },
             {
