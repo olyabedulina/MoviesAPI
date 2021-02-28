@@ -8,10 +8,10 @@
 .search_count {
   padding: 27px 0;
   font-size: 14px;
-}
 
-.search_count_hightlight {
-  font-weight: 600;
+  &_hightlight {
+    font-weight: 600;
+  }
 }
 
 /* Movies List */
@@ -19,40 +19,63 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+
+  &_item {
+    flex: 0 0 auto;
+    width: 322px;
+    padding-bottom: 50px;
+  }
 }
 
-.movies_list_item {
-  flex: 0 0 auto;
-  width: 322px;
-  padding-bottom: 50px;
-}
+.movie {
+  position: relative;
 
-.movie_image {
+  &_image {
+  }
 
-}
+  &_footer {
+    display: flex;
+    flex-flow: row wrap;
+    padding-top: 20px;
 
-.movie_footer {
-  display: flex;
-  flex-flow: row wrap;
-  padding-top: 20px;
+    color: rgba(255, 255, 255, 0.5);
+  }
 
-  color: rgba(255, 255, 255, 0.5);
-}
+  &_title {
+    flex: 1 1 auto;
+  }
 
-.movie_title {
-  flex: 1 1 auto;
-}
+  &_release_date {
+    flex-shrink: 0;
+    padding: 5px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 3px;
+  }
 
-.movie_release_date {
-  flex-shrink: 0;
-  padding: 5px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 3px;
-}
+  &_genre {
+    flex: 0 0 100%;
+    padding-top: 2px;
+  }
 
-.movie_genre {
-  flex: 0 0 100%;
-  padding-top: 2px;
+  &_options {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 36px;
+    background: rgba(0, 0, 0, 0.8);
+    font-size: 30px;
+    transform: rotate(90deg);
+    display: none;
+    justify-content: center;
+    line-height: 17px;
+    cursor: pointer;
+  }
+
+  &:hover &_options {
+    display: flex;
+  }
 }
 
 /* Empty result */

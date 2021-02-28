@@ -10,17 +10,27 @@
 
     background: url(./images/header-bg.jpg) no-repeat 0 0;
     background-size: cover;
-}
 
-.header:before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
 
-    content: '';
-    background: rgba(0, 0, 0, 0.7);
+        content: '';
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    .logo {
+        position: absolute;
+        top: 18px;
+        left: 55px;
+
+        &__image {
+            width: 150px;
+        }
+    }
 }
 
 .button_add_movie {
@@ -38,16 +48,6 @@
     text-decoration: none;
 }
 
-.header .logo {
-    position: absolute;
-    top: 18px;
-    left: 55px;
-}
-
-.header .logo__image {
-    width: 150px;
-}
-
 /* Search */
 .search_el {
     z-index: 1;
@@ -63,37 +63,39 @@
     letter-spacing: 5px;
 }
 
-.form__input {
-    box-sizing: border-box;
-    border: 0;
-    border-radius: 6px;
-    width: 715px;
-    height: 55px;
-    padding: 0 20px;
-    color: #fff;
-    font-size: 20px;
-    line-height: 20px;
+.form {
+    &__input {
+        box-sizing: border-box;
+        border: 0;
+        border-radius: 6px;
+        width: 715px;
+        height: 55px;
+        padding: 0 20px;
+        color: #fff;
+        font-size: 20px;
+        line-height: 20px;
 
-    background: rgba(0, 0, 0, 0.8);
-}
+        background: rgba(0, 0, 0, 0.8);
+    }
 
-.form__button {
-    box-sizing: border-box;
-    border: 0;
-    border-radius: 10px;
+    &__button {
+        box-sizing: border-box;
+        border: 0;
+        border-radius: 10px;
 
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 232px;
-    height: 55px;
-    margin-left: 14px;
-    padding: 0;
-    font-size: 19px;
-    line-height: 19px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 232px;
+        height: 55px;
+        margin-left: 14px;
+        padding: 0;
+        font-size: 19px;
+        line-height: 19px;
 
-    background: #f65261;
-    color: #fff;
-    text-transform: uppercase;
-    cursor: pointer;
+        background: #f65261;
+        color: #fff;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
 }

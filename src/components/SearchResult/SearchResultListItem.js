@@ -12,7 +12,7 @@ const SearchResultListItem = ({
         <div className={CM.movie_image}>
             <img
                 className={CM.movie_image__img}
-                src={data.src}
+                src={require(`${data.src}`)}
                 alt={data.title}
             />
         </div>
@@ -21,6 +21,7 @@ const SearchResultListItem = ({
             <div className={CM.movie_release_date}>{data.releaseDate}</div>
             <div className={CM.movie_genre}>{data.genre}</div>
         </div>
+        <div className={CM.movie_options}>...</div>
     </li>
 }
 

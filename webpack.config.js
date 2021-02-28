@@ -53,30 +53,28 @@ module.exports = (env = {}) => ({
                         },
                     }
                 },
-                {
-                    loader: "postcss-loader",
-                    options: {
-                        postcssOptions: {
-                            plugins: [
-                                [
-                                    "postcss-preset-env",
-                                    {
-                                        // Options
-                                    },
-                                ],
-                            ],
-                        },
-                    }
+                'postcss-loader'
             ]
-            },
-            {
-                test: /\.jpg($|\?)/,
-                use: 'file-loader'
-            },
-            {
-                test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.otf($|\?)|\.eot($|\?)|\.svg($|\?)/,
-                use: 'url-loader'
-            }
+        },
+        {
+            test: /\.(png|jpe?g|gif)$/i,
+            use: [
+                {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        publicPath: 'img',
+                        outputPath: 'img',
+                        useRelativePath: true,
+                        esModule: false,
+                    }
+                }
+                ]
+        },
+        {
+            test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.otf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+            use: 'url-loader'
+        }
         ]
     },
     plugins: (plugins => env.dev ? plugins.concat([

@@ -9,14 +9,14 @@ import ErrorBoundary from './ErrorBoundary'
 const App = () => {
 
     return <>
-        <div className="app">
-            <Header/>
-            <ErrorBoundary>
+        <ErrorBoundary>
+            <div className="app">
+                <Header/>
                 <Nav/>
-            </ErrorBoundary>
-            <SearchResult/>
-            <Footer/>
-        </div>
+                <SearchResult/>
+                <Footer/>
+            </div>
+        </ErrorBoundary>
     </>
 }
 
