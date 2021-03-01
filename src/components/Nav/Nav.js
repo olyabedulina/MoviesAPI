@@ -1,6 +1,7 @@
 import React from 'react'
 
 import FilterList from './FilterList'
+import ResultsSort from './ResultsSort'
 
 import CM from './styles.pcss'
 
@@ -38,10 +39,7 @@ const Nav = () => {
         <FilterList
             items={filterItems}
         />
-        <div className={CM.results_sort}>
-            <h2 className={CM.results_sort_label}>Sort by</h2>
-            <div className={`${CM.results_sort_criterion} ${CM.results_sort_up}`}>Release date</div>
-        </div>
+        <ResultsSort/>
     </div>
 }
 
