@@ -9,9 +9,9 @@ const Header = () => {
 
     return <div className={CM.header}>
         <a href="#" className={CM.logo}>
-            <img className={CM.logo__image} src={headerLogo} alt="Netflix roulette"/>
+            <img className={CM.logoImage} src={headerLogo} alt="Netflix roulette"/>
         </a>
-        <a href="#" className={CM.button_add_movie}>
+        <a href="#" className={CM.buttonAddMovie}>
             + Add Movie
         </a>
         <Search/>

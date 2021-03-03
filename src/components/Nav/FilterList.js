@@ -9,7 +9,7 @@ const FilterList = ({
     items
 }) => {
 
-    return (items.length > 0) ? <ul className={CM.results_filter}>
+    return (items.length > 0) ? <ul className={CM.resultsFilter}>
         {
             items.map((item, index) => <FilterListItem
                     key={item.id}

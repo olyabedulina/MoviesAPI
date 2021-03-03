@@ -51,9 +51,9 @@ let searchResultItems = [
 
 const SearchResult = () => {
 
-    return <div className={CM.search_result}>
-        <div className={CM.search_count}>
-            <strong className={CM.search_count_hightlight}>6</strong> movies found
+    return <div className={CM.searchResult}>
+        <div className={CM.searchCount}>
+            <strong className={CM.searchCountHightlight}>6</strong> movies found
         </div>
         <SearchResultList
             items={searchResultItems}

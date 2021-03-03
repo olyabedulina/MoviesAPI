@@ -8,10 +8,10 @@ const FilterListItem = ({
     index
 }) => {
 
-    return <li className={data.isSelected ? `${CM.results_filter_item} ${CM.selected}`: `${CM.results_filter_item}`}>
+    return <li className={data.isSelected ? `${CM.resultsFilterItem} ${CM.selected}`: `${CM.resultsFilterItem}`}>
         <a
             href="#"
-            className={CM.results_filter_link}
+            className={CM.resultsFilterLink}
         >{data.name}</a>
     </li>
 }

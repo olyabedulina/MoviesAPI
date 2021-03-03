@@ -9,7 +9,7 @@ const SearchResultList = ({
   items
 }) => {
 
-  return (items.length > 0) ? <ul className={CM.movies_list}>
+  return (items.length > 0) ? <ul className={CM.moviesList}>
       {
           items.map((item, index) => <SearchResultListItem
               key={item.id}
@@ -18,7 +18,7 @@ const SearchResultList = ({
               />
           )
       }
-    </ul> : <div className={CM.empty_result}>No movie found</div>
+    </ul> : <div className={CM.emptyResult}>No movie found</div>
 }
 
 SearchResultList.propTypes = {

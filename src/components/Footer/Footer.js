@@ -7,7 +7,7 @@ const Footer = () => {
 
     return <div className={CM.footer}>
         <a href="#" className={CM.logo}>
-            <img className={CM.logo_image} src={footerLogo} alt="Netflix roulette"/>
+            <img className={CM.logoImage} src={footerLogo} alt="Netflix roulette"/>
         </a>
     </div>
 }
