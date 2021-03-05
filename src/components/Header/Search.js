@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../Button'
 
 import CM from './styles.pcss'
 
@@ -8,7 +9,9 @@ const Search = () => {
         <h1 className={CM.searchTitle}>Find your movie</h1>
         <div className={CM.form}>
             <input type="text" placeholder="What do you want to watch?" className={CM.formInput}/>
-            <button className={CM.formButton} type="button">Search</button>
+            <Button className={CM.formButton}>
+                Search
+            </Button>
         </div>
     </div>
 }

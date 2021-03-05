@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Search from './Search'
+import Button from '../Button'
 
 import CM from './styles.pcss'
 import headerLogo from '../images/logo.png'
@@ -11,9 +12,9 @@ const Header = () => {
         <a href="#" className={CM.logo}>
             <img className={CM.logoImage} src={headerLogo} alt="Netflix roulette"/>
         </a>
-        <a href="#" className={CM.buttonAddMovie}>
+        <Button kind="aux" className={CM.buttonAddMovie}>
             + Add Movie
-        </a>
+        </Button>
         <Search/>
     </div>
 }
