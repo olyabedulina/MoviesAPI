@@ -69,7 +69,21 @@
       height: 0;
       border: 5px solid transparent;
       border-top: 7px solid #f65261;
-      margin-top: -2.5px;
+      transform: translateY(-25%);
+    }
+
+    &.resultsSortDown:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 4px;
+
+      display: block;
+      width: 0;
+      height: 0;
+      border: 5px solid transparent;
+      border-bottom: 7px solid #f65261;
+      transform: translateY(-75%);
     }
   }
 }

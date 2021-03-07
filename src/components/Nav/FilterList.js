@@ -26,7 +26,13 @@ const FilterList = ({
 }
 
 FilterList.propTypes = {
-    items: PropTypes.array.isRequired
+    items: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string,
+            name: PropTypes.string,
+            isSelected: PropTypes.bool
+        })
+    ).isRequired
 };
 
 export default FilterList

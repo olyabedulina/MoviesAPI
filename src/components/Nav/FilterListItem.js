@@ -17,7 +17,11 @@ const FilterListItem = ({
 }
 
 FilterListItem.propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
+        isSelected: PropTypes.bool
+    }).isRequired,
     index: PropTypes.number
 };
 

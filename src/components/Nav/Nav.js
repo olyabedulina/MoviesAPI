@@ -1,46 +1,35 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import FilterList from './FilterList'
 import ResultsSort from './ResultsSort'
 
 import CM from './styles.pcss'
 
-let filterItems = [
-    {
-        id: '1',
-        name: 'All',
-        isSelected: true
-    },
-    {
-        id: '2',
-        name: 'Documentary',
-        isSelected: false
-    },
-    {
-        id: '3',
-        name: 'Comedy',
-        isSelected: false
-    },
-    {
-        id: '4',
-        name: 'Horror',
-        isSelected: false
-    },
-    {
-        id: '5',
-        name: 'Crime',
-        isSelected: false
-    }
-];
-
-const Nav = () => {
+const Nav = ({
+    items,
+    sortByReleaseUp
+}) => {
 
     return <div className={CM.nav}>
         <FilterList
-            items={filterItems}
+            items={items}
         />
-        <ResultsSort/>
+        <ResultsSort
+            sortByReleaseUp={sortByReleaseUp}
+        />
     </div>
 }
+
+Nav.propTypes = {
+    items: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string,
+            name: PropTypes.string,
+            isSelected: PropTypes.bool
+        })
+    ).isRequired,
+    sortByReleaseUp: PropTypes.bool
+};
 
 export default Nav
