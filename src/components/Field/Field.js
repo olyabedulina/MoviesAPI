@@ -34,7 +34,7 @@ const Field = ({
                         className={CM.fieldInput}
                         placeholder={placeholder}
                         type={type}
-                        value={value && ''}
+                        value={value}
                     />
                 </label>
             </div>

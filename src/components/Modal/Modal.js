@@ -24,7 +24,7 @@ const Modal = ({
             {
                 (fieldsList.fields.length > 0) ? <ul className={CM.modalContainer}>
                     {
-                        fieldsList.fields.map((field, index) => <li className={CM.modalContainerItem}>
+                        fieldsList.fields.map((field, index) => <li key={index} className={CM.modalContainerItem}>
                                 <Field
                                     label={field.label}
                                     kind={field.kind}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import CM from './styles.pcss'
@@ -7,12 +7,16 @@ const Input = ({
     className = '',
     kind = '',
     type = 'text',
-    value,
+    value = '',
     placeholder = '',
     children,
-    onClick = Function.prototype,
-    onChange = Function.prototype
+    onClick = Function.prototype
 }) => {
+    const [inputValue, setinputValue] = useState(value)
+
+    function handleInputChange(event) {
+        setinputValue(event.target.value)
+    }
 
     function handleKeyDown(event) {
         if (event.key === 'Enter') {
@@ -20,14 +24,10 @@ const Input = ({
         }
     }
 
-    function handleInputChange(event) {
-        onChange();
-    }
-
     return <input
         className={`${className} ${CM.input} ${CM["kind-" + kind] || ''}`}
         type={type}
-        value={value}
+        value={inputValue}
         placeholder={placeholder}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}>
