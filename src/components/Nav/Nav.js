@@ -8,7 +8,8 @@ import CM from './styles.pcss'
 
 const Nav = ({
     items,
-    sortByReleaseUp
+    sortByReleaseUp,
+    onChangeSort
 }) => {
 
     return <div className={CM.nav}>
@@ -17,6 +18,7 @@ const Nav = ({
         />
         <ResultsSort
             sortByReleaseUp={sortByReleaseUp}
+            onChangeSort={onChangeSort}
         />
     </div>
 }
@@ -29,7 +31,8 @@ Nav.propTypes = {
             isSelected: PropTypes.bool
         })
     ).isRequired,
-    sortByReleaseUp: PropTypes.bool
+    sortByReleaseUp: PropTypes.bool,
+    onChangeSort: PropTypes.func
 };
 
 export default Nav

@@ -51,6 +51,10 @@ const App = () => {
         setDisplayMode('delete');
     }
 
+    function handleChangeSort(newSortStatus) {
+        setSortByReleaseUp(newSortStatus);
+    }
+
     return <>
         <ErrorBoundary>
             <div className="app">
@@ -59,7 +63,8 @@ const App = () => {
                 />
                 <Nav
                     items={filterItems}
-                    sortByReleaseUp={sortByReleaseUp}/>
+                    sortByReleaseUp={sortByReleaseUp}
+                    onChangeSort={handleChangeSort}/>
                 <SearchResult
                     onMovieEdit={handleEditMovie}
                     onMovieDelete={handleDeleteMovie}
