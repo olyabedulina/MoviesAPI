@@ -26,6 +26,7 @@ const Modal = ({
                     {
                         fieldsList.fields.map((field, index) => <li key={index} className={CM.modalContainerItem}>
                                 <Field
+                                    className="modalField"
                                     label={field.label}
                                     kind={field.kind}
                                     type={field.type}
@@ -43,6 +44,7 @@ const Modal = ({
                 (fieldsList.buttons.length > 0) ? <div className={CM.modalFooter}>
                         {
                             fieldsList.buttons.map((button, index) => <Button
+                                key={index}
                                 kind={button.kind}
                                 className={CM.modalFooterButton}>
                                     {button.text}

@@ -2,10 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Input from '../Input'
+import Dropdown from '../Dropdown'
 
 import CM from './styles.pcss'
 
 const Field = ({
+    className = '',
     label = 'Label',
     placeholder = 'Text here',
     type = 'text',
@@ -42,13 +44,16 @@ const Field = ({
             return <div className={CM.field}>
                 <label className={CM.fieldLabel}>
                     <span className={CM.fieldLabelText}>{label}</span>
-                    <span>SELECT WOULD BE HERE</span>
+                    {/*<span>SELECT WOULD BE HERE</span>*/}
+                    <Dropdown
+                        className={className}/>
                 </label>
             </div>
     }
 }
 
 Field.propTypes = {
+    className: PropTypes.string,
     label: PropTypes.string,
     placeholder: PropTypes.string,
     type: PropTypes.string,
