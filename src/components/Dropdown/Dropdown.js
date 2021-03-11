@@ -1,41 +1,35 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
 import CM from './styles.pcss'
 
 const Dropdown = ({
     className = '',
     placeholder,
-
+    children
 }) => {
-    const [isOpen, setIsOpen] = React.useState(false);
-    // const [selectedData, setSelectedData] = React.useState([]);
+    const [opened, setOpened] = useState(false)
 
-    function handleDropdownClick() {
-        setIsOpen(!isOpen)
+    function handleTriggerClick() {
+        setOpened(!opened)
     }
 
-    return <div className={`${CM[className] || ''} ${CM.dropdown}`}>
-        <div
-            className={CM.dropdownInput}
-            onClick={handleDropdownClick}>
-            <div className={CM.dropdownInputPlaceholder}>
-                Select Genre
-            </div>
-            {/*<ul className={CM.dropdownInputSelectedDataList}>*/}
-                {/*<li className={CM.dropdownInputSelectedDataListItem}>Temp data</li>*/}
-                {/*<li className={CM.dropdownInputSelectedDataListItem}>Temp data</li>*/}
-                {/*<li className={CM.dropdownInputSelectedDataListItem}>Temp data</li>*/}
-            {/*</ul>*/}
-            <div className={`${CM.dropdownInputButton} ${CM.dropdownInputButtonUp}`}></div>
+    return <div className={`${className} ${CM.dropdown} ${opened ? CM.opened : ''}`}>
+        <div className={CM.dropdownInput}>
+            <div className={CM.dropdownPlaceholder}>{placeholder}</div>
+            <div
+                className={`${CM.dropdownInputButton} ${opened ? CM.dropdownInputButtonDown : CM.dropdownInputButtonUp}`}
+                onClick={handleTriggerClick} />
         </div>
-        {
-            (isOpen > 0) ? <ul className={CM.dropdownList}>
-                <li className={CM.dropdownListItem}>Temp data</li>
-                <li className={CM.dropdownListItem}>Temp data</li>
-                <li className={CM.dropdownListItem}>Temp data</li>
-            </ul> : ''
-        }
+        {opened && <div className={CM.dropdownList}>{children}</div>}
+
     </div>
 }
+
+Dropdown.propTypes = {
+    className: PropTypes.string,
+    placeholder: PropTypes.string,
+    children: PropTypes.array
+};
 
 export default Dropdown

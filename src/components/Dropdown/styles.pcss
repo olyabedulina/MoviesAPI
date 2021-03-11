@@ -8,61 +8,56 @@
 .dropdownInput {
   position: relative;
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   height: 55px;
-  padding: 16px 37px 16px 17px;
   border-radius: 6px;
   background-color: #232323;
   color: #fff;
   font-size: 18px;
   line-height: 20px;
   box-shadow: 0 0 4px 1px #1f1f1f;
-  cursor: pointer;
 
   .modalField & {
     background-color: rgba(255, 255, 255, 0.1);
   }
 }
 
-.dropdownInputSelectedDataList {
-  display: flex;
-
-  &Item {
-    position: relative;
-    padding-right: 30px;
-    cursor: pointer;
-
-    &:after {
-      content: 'x';
-      position: absolute;
-      top: 0;
-      right: 16px;
-      display: block;
-      cursor: pointer;
-      color: #f65261;
-    }
-  }
+.dropdownPlaceholder {
+  flex-grow: 1;
+  padding: 16px 17px;
 }
 
 .dropdownInputButton {
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  display: block;
-  width: 0;
-  height: 0;
+  position: relative;
+  width: 40px;
+  height: 100%;
   cursor: pointer;
+}
 
-  &Up {
+.dropdownInputButtonUp {
+  &:after {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    content: '';
     border: 5px solid transparent;
     border-top: 7px solid #f65261;
     transform: translateY(-25%);
   }
+}
 
-  &Down {
+.dropdownInputButtonDown {
+  &:after {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    width: 0;
+    content: '';
     border: 5px solid transparent;
     border-bottom: 7px solid #f65261;
-    transform: translateY(75%);
+    transform: translateY(-75%);
   }
 }
 
@@ -76,6 +71,9 @@
   border-radius: 6px;
   box-shadow: 0 5px 8px 3px #1f1f1f;
   background-color: #222;
+
+  overflow: auto;
+  max-height: 200px;
 
   &Item {
     padding-bottom: 20px;

@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Input from '../Input'
-import Dropdown from '../Dropdown'
+import MultiSelect from '../MultiSelect'
 
 import CM from './styles.pcss'
 
@@ -13,8 +13,33 @@ const Field = ({
     type = 'text',
     kind = 'input',
     text = '',
-    value
+    value,
+    selectedGenresArray = []
 }) => {
+
+    const [genres, setGenres] = useState([
+        {
+            value: '11',
+            title: 'Crime'
+        },
+        {
+            value: '12',
+            title: 'Documentary'
+        },
+        {
+            value: '13',
+            title: 'Horror'
+        },
+        {
+            value: '14',
+            title: 'Comedy'
+        }
+    ])
+    const [selectedGenres, setSelectedGenres] = useState(selectedGenresArray)
+
+    function handleSelectedGenresChange(nextSelectedGenres) {
+        setSelectedGenres(nextSelectedGenres)
+    }
 
     switch (kind) {
         case 'text':
@@ -42,12 +67,13 @@ const Field = ({
             </div>
         case 'select':
             return <div className={CM.field}>
-                <label className={CM.fieldLabel}>
-                    <span className={CM.fieldLabelText}>{label}</span>
-                    {/*<span>SELECT WOULD BE HERE</span>*/}
-                    <Dropdown
-                        className={className}/>
-                </label>
+                <span className={CM.fieldLabelText}>{label}</span>
+                <MultiSelect
+                    placeholder="Select genre"
+                    items={genres}
+                    selectedItems={selectedGenres}
+                    onChange={handleSelectedGenresChange}
+                />
             </div>
     }
 }
@@ -59,7 +85,8 @@ Field.propTypes = {
     type: PropTypes.string,
     kind: PropTypes.string,
     text: PropTypes.string,
-    value: PropTypes.string
+    value: PropTypes.string,
+    selectedGenresArray: PropTypes.array
 };
 
 export default Field

@@ -33,6 +33,7 @@ const Modal = ({
                                     placeholder={field.placeholder}
                                     value={field.value}
                                     text={field.text}
+                                    selectedGenresArray={field.selectedGenres}
                                 />
                             </li>
                         )

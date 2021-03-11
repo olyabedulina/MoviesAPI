@@ -18,6 +18,7 @@ import {ModalFieldListDeleteData} from './data/ModalFieldListDeleteData'
 const App = () => {
     const [displayMode, setDisplayMode] = useState('basic');
     const [sortByReleaseUp, setSortByReleaseUp] = useState(true);
+    const [selectedDropdownData, setselectedDropdownData] = React.useState([]);
 
     /* ----------- Put uploaded data into States ----------- */
     const [searchResultItems, setSearchResultItems] = useState([]);
@@ -53,6 +54,10 @@ const App = () => {
 
     function handleChangeSort(newSortStatus) {
         setSortByReleaseUp(newSortStatus);
+    }
+
+    function handleSelectItem() {
+        alert(1);
     }
 
     return <>

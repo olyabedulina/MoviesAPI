@@ -1,34 +1,38 @@
-import React, { useState } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import CM from './styles.pcss'
 
 const Checkbox = ({
     className = '',
-    kind = '',
-    type = 'checkbox',
-    name = 'checkbox'
+    checked = false,
+    onChange = Function.prototype,
+    data,
+    children
 }) => {
-    const [checked, setChecked] = React.useState(false);
 
-    function handleCheckboxChange() {
-        setChecked(!checked)
+    function handleChange(event) {
+         onChange(!checked, data)
     }
 
-    return <>
-        <input
-            id="checkboxId"
-            className={`${className} ${CM.checkbox} ${CM["kind-" + kind] || ''}`}
-            type={type}
-            name={name}
-            defaultChecked={checked}
-            onChange={handleCheckboxChange}
-        />
-        <label
-            className={CM.checkboxLabel}
-            for="checkboxId">
-            Checkbox
+    return <label className={CM.checkboxLabel}>
+            <input
+                className={`${className} ${CM.checkbox}`}
+                type="checkbox"
+                checked={checked}
+                onChange={handleChange}
+            />
+            <span className={CM.checkboxText}>{children}</span>
         </label>
-    </>
 }
+
+Checkbox.propTypes = {
+    className: PropTypes.string,
+    checked: PropTypes.bool,
+    onChange: PropTypes.func,
+    data: PropTypes.string,
+    children: PropTypes.string
+};
+
 
 export default Checkbox
