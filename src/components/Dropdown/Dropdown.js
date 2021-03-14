@@ -5,6 +5,7 @@ import CM from './styles.pcss'
 
 const Dropdown = ({
     className = '',
+    theme = '',
     placeholder,
     children
 }) => {
@@ -14,7 +15,7 @@ const Dropdown = ({
         setOpened(!opened)
     }
 
-    return <div className={`${className} ${CM.dropdown} ${opened ? CM.opened : ''}`}>
+    return <div className={`${className} ${CM["theme-" + theme] || ''} ${CM.dropdown} ${opened ? CM.opened : ''}`}>
         <div className={CM.dropdownInput}>
             <div className={CM.dropdownPlaceholder}>{placeholder}</div>
             <div

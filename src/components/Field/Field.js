@@ -14,27 +14,10 @@ const Field = ({
     kind = 'input',
     text = '',
     value,
+    genres,
     selectedGenresArray = []
 }) => {
 
-    const [genres, setGenres] = useState([
-        {
-            value: '11',
-            title: 'Crime'
-        },
-        {
-            value: '12',
-            title: 'Documentary'
-        },
-        {
-            value: '13',
-            title: 'Horror'
-        },
-        {
-            value: '14',
-            title: 'Comedy'
-        }
-    ])
     const [selectedGenres, setSelectedGenres] = useState(selectedGenresArray)
 
     function handleSelectedGenresChange(nextSelectedGenres) {

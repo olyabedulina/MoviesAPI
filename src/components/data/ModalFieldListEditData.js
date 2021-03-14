@@ -33,7 +33,7 @@ export const ModalFieldListEditData = {
             type: 'multiple',
             placeholder: 'Select Genre',
             value: 'comedy',
-            selectedGenres: ['11', '12']
+            selectedGenres: ['11', '8']
         },
         {
             label: 'Overview',

@@ -8,6 +8,8 @@ import CM from './styles.pcss'
 
 const Modal = ({
     fieldsList,
+    genres,
+    selectedGenresArray,
     onModalClose = Function.prototype
 }) => {
 
@@ -33,6 +35,7 @@ const Modal = ({
                                     placeholder={field.placeholder}
                                     value={field.value}
                                     text={field.text}
+                                    genres={genres}
                                     selectedGenresArray={field.selectedGenres}
                                 />
                             </li>

@@ -63,8 +63,8 @@ module.exports = (env = {}) => ({
                     loader: 'file-loader',
                     options: {
                         name: '[name].[ext]',
-                        publicPath: 'img',
-                        outputPath: 'img',
+                        publicPath: 'images',
+                        outputPath: 'images',
                         useRelativePath: true,
                         esModule: false,
                     }

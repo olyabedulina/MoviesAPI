@@ -6,6 +6,7 @@ import SearchResult from './SearchResult'
 import Footer from './Footer'
 import ErrorBoundary from './ErrorBoundary'
 import Modal from './Modal'
+import MovieDetails from './MovieDetails'
 
 /* ----------- Upload data from files ----------- */
 import {searchResultItemsData} from './data/searchResultItemsData'
@@ -17,8 +18,13 @@ import {ModalFieldListDeleteData} from './data/ModalFieldListDeleteData'
 
 const App = () => {
     const [displayMode, setDisplayMode] = useState('basic');
-    const [sortByReleaseUp, setSortByReleaseUp] = useState(true);
-    const [selectedDropdownData, setselectedDropdownData] = React.useState([]);
+    const [movieDetailsID, setMovieDetailsID] = useState('');
+    const [movieFilterID, setMovieFilterID] = useState('0');
+
+    const [sortBy, setSortBy] = useState('date')
+    function handleSortChange(nextSortBy) {
+        setSortBy(nextSortBy)
+    }
 
     /* ----------- Put uploaded data into States ----------- */
     const [searchResultItems, setSearchResultItems] = useState([]);
@@ -52,37 +58,61 @@ const App = () => {
         setDisplayMode('delete');
     }
 
-    function handleChangeSort(newSortStatus) {
-        setSortByReleaseUp(newSortStatus);
+    function handleMovieImageClick(id) {
+        setMovieDetailsID(id);
     }
 
-    function handleSelectItem() {
-        alert(1);
+    function handleMagnifierClick() {
+        setMovieDetailsID('');
+    }
+
+    function handleFilterClick(id) {
+        setMovieFilterID(id)
     }
 
     return <>
         <ErrorBoundary>
             <div className="app">
-                <Header
+                { movieDetailsID.length ? <MovieDetails
+                    movie={searchResultItems.find((item) => (item.id === movieDetailsID))}
+                    onMagnifierClick={handleMagnifierClick}
+                /> : <Header
                     onAddNewMovie={handleAddNewMovie}
-                />
+                /> }
                 <Nav
-                    items={filterItems}
-                    sortByReleaseUp={sortByReleaseUp}
-                    onChangeSort={handleChangeSort}/>
+                    items={filterItems.filter((item) => (item.isIncludedInFilter))}
+                    selectedItem={movieFilterID}
+                    sortBy={sortBy}
+                    onSortChange={handleSortChange}
+                    onFilterClick={handleFilterClick}
+                />
                 <SearchResult
+                    sortBy={sortBy}
                     onMovieEdit={handleEditMovie}
                     onMovieDelete={handleDeleteMovie}
-                    items={searchResultItems}
+                    onMovieImageClick={handleMovieImageClick}
+                    items={
+                        searchResultItems.filter((item) => {
+                            switch (movieFilterID) {
+                                case '0':
+                                    return true
+                                default:
+                                    return item.genre.some(({ id }) => (id === movieFilterID))
+                            }
+                        })
+                    }
                 />
                 <Footer/>
                 {
                     {
                         'add': <Modal
                             fieldsList={ModalFieldListAdd}
+                            genres={filterItems}
                             onModalClose={handleModalClose} />,
                         'edit': <Modal
                             fieldsList={ModalFieldListEdit}
+                            genres={filterItems}
+                            // selectedGenresArray={searchResultItems.find((item) => (item.id === movieDetailsID)).genre}
                             onModalClose={handleModalClose} />,
                         'delete': <Modal
                             fieldsList={ModalFieldListDelete}
