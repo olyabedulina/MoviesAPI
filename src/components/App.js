@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
+import usePersistentState from '../hooks/usePersistentState'
 import Header from './Header'
 import Nav from './Nav'
 import SearchResult from './SearchResult'
@@ -19,9 +20,10 @@ import {ModalFieldListDeleteData} from './data/ModalFieldListDeleteData'
 const App = () => {
     const [displayMode, setDisplayMode] = useState('basic');
     const [movieDetailsID, setMovieDetailsID] = useState('');
-    const [movieFilterID, setMovieFilterID] = useState('0');
+    const [movieFilterID, setMovieFilterID] = usePersistentState('0', 'movieFilter');
 
-    const [sortBy, setSortBy] = useState('date')
+    // const [sortBy, setSortBy] = useState('date')
+    const [sortBy, setSortBy] = usePersistentState('date', 'sortBy')
     function handleSortChange(nextSortBy) {
         setSortBy(nextSortBy)
     }
