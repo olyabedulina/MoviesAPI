@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import Dropdown from '../Dropdown'
+import DropdownControlled from '../DropdownControlled'
 
 import CM from './styles.pcss'
 
@@ -12,17 +12,22 @@ const sortNameToDisplayNameMap = {
 
 const ResultsSort = ({
     sortBy,
-    onSortChange
+    onSortChange,
+    isOpenedDropdown,
+    onIsOpenedDropdownChange
 }) => {
     return <div className={CM.resultsSort}>
         <h2 className={CM.resultsSortLabel}>Sort by</h2>
         <div className={CM.resultsSortCriterion}>
-            <Dropdown
+            <DropdownControlled
                 theme='resultsSortCriterion'
-                placeholder={sortNameToDisplayNameMap[sortBy]}>
-                <div onClick={() => { onSortChange('date') }}>Release date</div>
-                <div onClick={() => { onSortChange('title') }}>Title</div>
-            </Dropdown>
+                placeholder={sortNameToDisplayNameMap[sortBy]}
+                isOpened={isOpenedDropdown}
+                onIsOpenedChange={onIsOpenedDropdownChange}
+            >
+                <div onClick={() => { onSortChange('date'); onIsOpenedDropdownChange() }}>Release date</div>
+                <div onClick={() => { onSortChange('title'); onIsOpenedDropdownChange() }}>Title</div>
+            </DropdownControlled>
         </div>
 
     </div>
@@ -30,7 +35,9 @@ const ResultsSort = ({
 
 ResultsSort.propTypes = {
     sortBy: PropTypes.string,
-    onSortChange: PropTypes.func
+    onSortChange: PropTypes.func,
+    isOpenedDropdown: PropTypes.bool,
+    onIsOpenedDropdownChange : PropTypes.func
 };
 
 export default ResultsSort

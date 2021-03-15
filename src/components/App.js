@@ -27,6 +27,11 @@ const App = () => {
         setSortBy(nextSortBy)
     }
 
+    const [isOpenedDropdown, setIsOpenedDropdown] = useState(false)
+    function handleIsOpenedDropdownChange() {
+        setIsOpenedDropdown(!isOpenedDropdown)
+    }
+
     /* ----------- Put uploaded data into States ----------- */
     const [searchResultItems, setSearchResultItems] = useState([]);
     const [filterItems, setFilterItems] = useState([]);
@@ -89,6 +94,8 @@ const App = () => {
                     sortBy={sortBy}
                     onSortChange={handleSortChange}
                     onFilterClick={handleFilterClick}
+                    isOpenedDropdown={isOpenedDropdown}
+                    onIsOpenedDropdownChange={handleIsOpenedDropdownChange}
                 />
                 <SearchResult
                     sortBy={sortBy}

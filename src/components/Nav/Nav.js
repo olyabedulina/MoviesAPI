@@ -11,7 +11,9 @@ const Nav = ({
     selectedItem,
     sortBy,
     onSortChange,
-    onFilterClick
+    onFilterClick,
+    isOpenedDropdown,
+    onIsOpenedDropdownChange
 }) => {
 
     return <div className={CM.nav}>
@@ -23,6 +25,8 @@ const Nav = ({
         <ResultsSort
             sortBy={sortBy}
             onSortChange={onSortChange}
+            isOpenedDropdown={isOpenedDropdown}
+            onIsOpenedDropdownChange={onIsOpenedDropdownChange}
         />
     </div>
 }
@@ -38,7 +42,9 @@ Nav.propTypes = {
     selectedItem: PropTypes.string,
     sortBy: PropTypes.string,
     onSortChange: PropTypes.func,
-    onFilterClick: PropTypes.func
+    onFilterClick: PropTypes.func,
+    isOpenedDropdown: PropTypes.bool,
+    onIsOpenedDropdownChange : PropTypes.func
 };
 
 export default Nav
