@@ -123,7 +123,7 @@ const App = () => {
                         'edit': <Modal
                             fieldsList={ModalFieldListEdit}
                             genres={filterItems}
-                            // selectedGenresArray={searchResultItems.find((item) => (item.id === movieDetailsID)).genre}
+                            // editMovieData={searchResultItems.find((item) => (item.id === movieDetailsID))}
                             onModalClose={handleModalClose} />,
                         'delete': <Modal
                             fieldsList={ModalFieldListDelete}

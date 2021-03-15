@@ -26,7 +26,6 @@ const SearchResultListItem = ({
         onMovieImageClick(data.id)
     }
 
-
     return <li className={`${CM.moviesListItem} ${CM.movie}`}>
         <div className={CM.movieImage}>
             <img

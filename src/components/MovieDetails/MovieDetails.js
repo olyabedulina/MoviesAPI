@@ -33,7 +33,7 @@ const MovieDetails = ({
             <div className={CM.movieData}>
                 <div className={CM.movieName}>{movie.title}</div>
                 <div className={CM.movieRating}>{movie.rating}</div>
-                <div className={CM.movieGenre}>{movie.genre.join(', ')}</div>
+                <div className={CM.movieGenre}>{movie.genre.map(({ text }) => text).join(', ')}</div>
                 <div className={CM.movieReleaseYear}>{movie.releaseDate}</div>
                 <div className={CM.movieDuration}>{movie.movieDuration.timing} {movie.movieDuration.units}</div>
                 <div className={CM.movieDescription}>{movie.description}</div>

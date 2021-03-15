@@ -9,7 +9,6 @@ import CM from './styles.pcss'
 const Modal = ({
     fieldsList,
     genres,
-    selectedGenresArray,
     onModalClose = Function.prototype
 }) => {
 
@@ -37,6 +36,7 @@ const Modal = ({
                                     text={field.text}
                                     genres={genres}
                                     selectedGenresArray={field.selectedGenres}
+                                    // editMovieData={editMovieData}
                                 />
                             </li>
                         )

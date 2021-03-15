@@ -17,11 +17,9 @@ const DropdownControlled = ({
     }
 
     return <div className={`${className} ${CM["theme-" + theme] || ''} ${CM.dropdown} ${isOpened ? CM.opened : ''}`}>
-        <div className={CM.dropdownInput}>
+        <div className={CM.dropdownInput} onClick={handleTriggerClick}>
             <div className={CM.dropdownPlaceholder}>{placeholder}</div>
-            <div
-                className={`${CM.dropdownInputButton} ${isOpened ? CM.dropdownInputButtonDown : CM.dropdownInputButtonUp}`}
-                onClick={handleTriggerClick} />
+            <div className={`${CM.dropdownInputButton} ${isOpened ? CM.dropdownInputButtonDown : CM.dropdownInputButtonUp}`} />
         </div>
         {isOpened && <div className={CM.dropdownList}>{children}</div>}
 
