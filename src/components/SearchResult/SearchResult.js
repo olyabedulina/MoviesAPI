@@ -46,6 +46,7 @@ SearchResult.propTypes = {
                 timing: PropTypes.number,
                 units: PropTypes.string
             }),
+            url: PropTypes.string,
             description: PropTypes.string
         })
     ).isRequired,

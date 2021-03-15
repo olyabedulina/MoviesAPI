@@ -34,7 +34,8 @@ FilterList.propTypes = {
         PropTypes.shape({
             id: PropTypes.string,
             name: PropTypes.string,
-            isSelected: PropTypes.bool
+            isSelected: PropTypes.bool,
+            isIncludedInFilter: PropTypes.bool
         })
     ).isRequired,
     selectedItem: PropTypes.string,

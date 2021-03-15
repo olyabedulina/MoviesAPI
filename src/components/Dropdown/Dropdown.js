@@ -29,6 +29,7 @@ const Dropdown = ({
 
 Dropdown.propTypes = {
     className: PropTypes.string,
+    theme: PropTypes.string,
     placeholder: PropTypes.string,
     children: PropTypes.array
 };

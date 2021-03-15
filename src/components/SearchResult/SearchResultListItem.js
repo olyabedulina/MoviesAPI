@@ -38,10 +38,11 @@ const SearchResultListItem = ({
         <div className={CM.movieFooter}>
             <div className={CM.movieTitle}>{data.title}</div>
             <div className={CM.movieReleaseDate}>{data.releaseDate}</div>
-            <div className={CM.movieGenre}>{data.genre.map(({ text }) => text).join(', ')}</div>
+            <div className={CM.movieGenre}>{data.genre.map(({ name }) => name).join(', ')}</div>
         </div>
         <div className={CM.movieOptions} onClick={handleMovieOptionsClick}>...</div>
         <Popup
+            itemId={data.id}
             showPopup={displayPopup}
             onPopupClose={handlePopupClose}
             onMovieEdit={onMovieEdit}
@@ -59,7 +60,7 @@ SearchResultListItem.propTypes = {
         genre: PropTypes.arrayOf(
             PropTypes.shape({
                 id: PropTypes.string,
-                text: PropTypes.string,
+                name: PropTypes.string,
             })
         ),
         rating: PropTypes.string,
@@ -67,6 +68,7 @@ SearchResultListItem.propTypes = {
             timing: PropTypes.number,
             units: PropTypes.string
         }),
+        url: PropTypes.string,
         description: PropTypes.string
     }).isRequired,
     index: PropTypes.number,

@@ -54,6 +54,12 @@ export const filterItemsData = [
         isIncludedInFilter: false
     },
     {
+        id: '7',
+        name: 'Drama',
+        isSelected: false,
+        isIncludedInFilter: false
+    },
+    {
         id: '8',
         name: 'Biography',
         isSelected: false,

@@ -6,15 +6,16 @@ import Nav from './Nav'
 import SearchResult from './SearchResult'
 import Footer from './Footer'
 import ErrorBoundary from './ErrorBoundary'
-import Modal from './Modal'
 import MovieDetails from './MovieDetails'
+
+import Modal from './Modal'
+import AddMovie from './Modal/AddMovie'
+import EditMovie from './Modal/EditMovie'
+import DeleteMovie from './Modal/DeleteMovie'
 
 /* ----------- Upload data from files ----------- */
 import {searchResultItemsData} from './data/searchResultItemsData'
 import {filterItemsData} from './data/filterItemsData'
-import {ModalFieldListAddData} from './data/ModalFieldListAddData'
-import {ModalFieldListEditData} from './data/ModalFieldListEditData'
-import {ModalFieldListDeleteData} from './data/ModalFieldListDeleteData'
 /* ----------- end Upload data from files ----------- */
 
 const App = () => {
@@ -32,20 +33,17 @@ const App = () => {
         setIsOpenedDropdown(!isOpenedDropdown)
     }
 
+    const [editMovieID, setEditMovieID] = useState('');
+    const [deleteMovieID, setDeleteMovieID] = useState('');
+
     /* ----------- Put uploaded data into States ----------- */
     const [searchResultItems, setSearchResultItems] = useState([]);
     const [filterItems, setFilterItems] = useState([]);
-    const [ModalFieldListAdd, setModalFieldListAdd] = useState({});
-    const [ModalFieldListEdit, setModalFieldListEdit] = useState({});
-    const [ModalFieldListDelete, setModalFieldListDelete] = useState({});
     /* ----------- end Put uploaded data into States ----------- */
 
     useEffect(() => {
         setSearchResultItems(searchResultItemsData)
         setFilterItems(filterItemsData)
-        setModalFieldListAdd(ModalFieldListAddData)
-        setModalFieldListEdit(ModalFieldListEditData)
-        setModalFieldListDelete(ModalFieldListDeleteData)
     }, [])
 
     function handleModalClose() {
@@ -56,11 +54,13 @@ const App = () => {
         setDisplayMode('add');
     }
 
-    function handleEditMovie() {
+    function handleEditMovie(id) {
+        setEditMovieID(id);
         setDisplayMode('edit');
     }
 
-    function handleDeleteMovie() {
+    function handleDeleteMovie(id) {
+        setDeleteMovieID(id);
         setDisplayMode('delete');
     }
 
@@ -116,18 +116,22 @@ const App = () => {
                 <Footer/>
                 {
                     {
-                        'add': <Modal
-                            fieldsList={ModalFieldListAdd}
-                            genres={filterItems}
-                            onModalClose={handleModalClose} />,
-                        'edit': <Modal
-                            fieldsList={ModalFieldListEdit}
-                            genres={filterItems}
-                            // editMovieData={searchResultItems.find((item) => (item.id === movieDetailsID))}
-                            onModalClose={handleModalClose} />,
-                        'delete': <Modal
-                            fieldsList={ModalFieldListDelete}
-                            onModalClose={handleModalClose} />,
+                        'add': <Modal onModalClose={handleModalClose}>
+                            <AddMovie
+                                genres={filterItems}
+                            />
+                        </Modal>,
+                        'edit': <Modal onModalClose={handleModalClose}>
+                            <EditMovie
+                                genres={filterItems}
+                                item={searchResultItems.find((item) => (item.id === editMovieID))}
+                            />
+                        </Modal>,
+                        'delete': <Modal onModalClose={handleModalClose}>
+                            <DeleteMovie
+                                item={searchResultItems.find((item) => (item.id === deleteMovieID))}
+                            />
+                        </Modal>,
                     }[displayMode]
                 }
             </div>

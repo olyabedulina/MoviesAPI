@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import CM from './styles.pcss'
 import headerLogo from "../images/logo.png";
@@ -33,7 +34,7 @@ const MovieDetails = ({
             <div className={CM.movieData}>
                 <div className={CM.movieName}>{movie.title}</div>
                 <div className={CM.movieRating}>{movie.rating}</div>
-                <div className={CM.movieGenre}>{movie.genre.map(({ text }) => text).join(', ')}</div>
+                <div className={CM.movieGenre}>{movie.genre.map(({ name }) => name).join(', ')}</div>
                 <div className={CM.movieReleaseYear}>{movie.releaseDate}</div>
                 <div className={CM.movieDuration}>{movie.movieDuration.timing} {movie.movieDuration.units}</div>
                 <div className={CM.movieDescription}>{movie.description}</div>
@@ -41,5 +42,28 @@ const MovieDetails = ({
         </div>
     </div>
 }
+
+MovieDetails.propTypes = {
+    movie: PropTypes.shape({
+    id: PropTypes.string,
+    src: PropTypes.string,
+    title: PropTypes.string,
+    releaseDate: PropTypes.number,
+    genre: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string,
+            name: PropTypes.string,
+        })
+    ),
+    rating: PropTypes.string,
+    movieDuration: PropTypes.shape({
+        timing: PropTypes.number,
+        units: PropTypes.string
+    }),
+    url: PropTypes.string,
+    description: PropTypes.string
+}).isRequired,
+    onMagnifierClick: PropTypes.func
+};
 
 export default MovieDetails
