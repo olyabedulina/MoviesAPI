@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 import usePersistentState from '../hooks/usePersistentState'
 import Header from './Header'
@@ -22,7 +22,6 @@ const App = () => {
     const [movieDetailsID, setMovieDetailsID] = useState('');
     const [movieFilterID, setMovieFilterID] = usePersistentState('0', 'movieFilter');
 
-    // const [sortBy, setSortBy] = useState('date')
     const [sortBy, setSortBy] = usePersistentState('date', 'sortBy')
     function handleSortChange(nextSortBy) {
         setSortBy(nextSortBy)
@@ -60,9 +59,12 @@ const App = () => {
         setDisplayMode('delete');
     }
 
-    function handleMovieImageClick(id) {
-        setMovieDetailsID(id);
-    }
+    // function handleMovieImageClick(id) {
+    //     setMovieDetailsID(id);
+    // }
+    const handleMovieImageClickCallback = useCallback(
+        (id) => { setMovieDetailsID(id) }, []
+    )
 
     function handleMagnifierClick() {
         setMovieDetailsID('');
@@ -92,7 +94,7 @@ const App = () => {
                     sortBy={sortBy}
                     onMovieEdit={handleEditMovie}
                     onMovieDelete={handleDeleteMovie}
-                    onMovieImageClick={handleMovieImageClick}
+                    onMovieImageClick={handleMovieImageClickCallback}
                     items={
                         searchResultItems.filter((item) => {
                             switch (movieFilterID) {

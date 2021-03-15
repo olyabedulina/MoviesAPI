@@ -57,7 +57,18 @@ SearchResultListItem.propTypes = {
         src: PropTypes.string,
         title: PropTypes.string,
         releaseDate: PropTypes.number,
-        genre: PropTypes.string
+        genre: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.string,
+                text: PropTypes.string,
+            })
+        ),
+        rating: PropTypes.string,
+        movieDuration: PropTypes.shape({
+            timing: PropTypes.number,
+            units: PropTypes.string
+        }),
+        description: PropTypes.string
     }).isRequired,
     index: PropTypes.number,
     onMovieEdit : PropTypes.func,

@@ -29,8 +29,8 @@ const ResultsSort = ({
 }
 
 ResultsSort.propTypes = {
-    sortByReleaseUp: PropTypes.bool,
-    onChangeSort: PropTypes.func
+    sortBy: PropTypes.string,
+    onSortChange: PropTypes.func
 };
 
 export default ResultsSort

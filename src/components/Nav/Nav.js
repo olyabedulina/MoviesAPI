@@ -36,8 +36,8 @@ Nav.propTypes = {
         })
     ).isRequired,
     selectedItem: PropTypes.string,
-    sortByReleaseUp: PropTypes.bool,
-    onChangeSort: PropTypes.func,
+    sortBy: PropTypes.string,
+    onSortChange: PropTypes.func,
     onFilterClick: PropTypes.func
 };
 
