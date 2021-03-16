@@ -11,12 +11,14 @@ const Popup = ({
     onMovieDelete = Function.prototype
 }) => {
 
-    function handleEditClick() {
+    function handleEditClick(event) {
+        event.preventDefault();
         onMovieEdit(itemId);
         onPopupClose();
     }
 
-    function handleDeleteClick() {
+    function handleDeleteClick(event) {
+        event.preventDefault();
         onMovieDelete(itemId);
         onPopupClose();
     }
