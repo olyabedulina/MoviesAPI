@@ -1,0 +1,88 @@
+/* Search Result */
+.searchResult {
+  flex: 1 100%;
+  padding: 0 70px;
+}
+
+/* Search Result */
+.searchCount {
+  padding: 27px 0;
+  font-size: 14px;
+
+  &Hightlight {
+    font-weight: 600;
+  }
+}
+
+/* Movies List */
+.moviesList {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  &Item {
+    flex: 0 0 auto;
+    width: 322px;
+    padding-bottom: 50px;
+  }
+}
+
+.movie {
+  position: relative;
+
+  &Image {
+  }
+
+  &Footer {
+    display: flex;
+    flex-flow: row wrap;
+    padding-top: 20px;
+
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  &Title {
+    flex: 1 1 auto;
+  }
+
+  &ReleaseDate {
+    flex-shrink: 0;
+    padding: 5px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 3px;
+  }
+
+  &Genre {
+    flex: 0 0 100%;
+    padding-top: 2px;
+  }
+
+  &Options {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 36px;
+    background: rgba(0, 0, 0, 0.8);
+    font-size: 30px;
+    transform: rotate(90deg);
+    display: none;
+    justify-content: center;
+    line-height: 17px;
+    cursor: pointer;
+  }
+
+  &:hover &Options {
+    display: flex;
+  }
+}
+
+/* Empty result */
+.emptyResult {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  padding: 70px 0 160px;
+}
