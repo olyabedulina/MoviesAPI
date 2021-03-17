@@ -83,6 +83,6 @@ module.exports = (env = {}) => ({
         new HTMLWebpackPlugin()
     ]),
     devServer: {
-        port: 7000
+        port: 7070
     }
 });
