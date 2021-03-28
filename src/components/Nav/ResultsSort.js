@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
 
 import DropdownControlled from '../DropdownControlled'
 
 import CM from './styles.pcss'
+import { sortMoviesBy } from '../../redux/actions'
 
 const sortNameToDisplayNameMap = {
     date: 'Release date',
@@ -16,6 +18,8 @@ const ResultsSort = ({
     isOpenedDropdown,
     onIsOpenedDropdownChange
 }) => {
+    const dispatch = useDispatch()
+
     return <div className={CM.resultsSort}>
         <h2 className={CM.resultsSortLabel}>Sort by</h2>
         <div className={CM.resultsSortCriterion}>
@@ -25,8 +29,8 @@ const ResultsSort = ({
                 isOpened={isOpenedDropdown}
                 onIsOpenedChange={onIsOpenedDropdownChange}
             >
-                <div onClick={() => { onSortChange('date'); onIsOpenedDropdownChange() }}>Release date</div>
-                <div onClick={() => { onSortChange('title'); onIsOpenedDropdownChange() }}>Title</div>
+                <div onClick={() => { onSortChange('date'); dispatch(sortMoviesBy('date')); onIsOpenedDropdownChange() }}>Release date</div>
+                <div onClick={() => { onSortChange('title'); dispatch(sortMoviesBy('title')); onIsOpenedDropdownChange() }}>Title</div>
             </DropdownControlled>
         </div>
 

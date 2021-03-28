@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import usePersistentState from '../hooks/usePersistentState'
 import Header from './Header'
@@ -13,12 +14,13 @@ import AddMovie from './Modal/AddMovie'
 import EditMovie from './Modal/EditMovie'
 import DeleteMovie from './Modal/DeleteMovie'
 
-/* ----------- Upload data from files ----------- */
-import {searchResultItemsData} from './data/searchResultItemsData'
-import {filterItemsData} from './data/filterItemsData'
-/* ----------- end Upload data from files ----------- */
+import { initApp } from '../redux/actions'
+import { getSearchResultItems } from '../redux/selectors'
+import { getFilterItems } from '../redux/selectors'
 
 const App = () => {
+    const dispatch = useDispatch()
+
     const [displayMode, setDisplayMode] = useState('basic');
     const [movieDetailsID, setMovieDetailsID] = useState('');
     const [movieFilterID, setMovieFilterID] = usePersistentState('0', 'movieFilter');
@@ -36,15 +38,14 @@ const App = () => {
     const [editMovieID, setEditMovieID] = useState('');
     const [deleteMovieID, setDeleteMovieID] = useState('');
 
-    /* ----------- Put uploaded data into States ----------- */
-    const [searchResultItems, setSearchResultItems] = useState([]);
-    const [filterItems, setFilterItems] = useState([]);
-    /* ----------- end Put uploaded data into States ----------- */
-
     useEffect(() => {
-        setSearchResultItems(searchResultItemsData)
-        setFilterItems(filterItemsData)
+        dispatch(initApp())
     }, [])
+
+    const searchResultItems = useSelector(getSearchResultItems)
+    const filterItems = useSelector(getFilterItems)
+
+    /* ----------- end Put uploaded data into States ----------- */
 
     function handleModalClose() {
         setDisplayMode('basic');
@@ -64,9 +65,6 @@ const App = () => {
         setDisplayMode('delete');
     }
 
-    // function handleMovieImageClick(id) {
-    //     setMovieDetailsID(id);
-    // }
     const handleMovieImageClickCallback = useCallback(
         (id) => { setMovieDetailsID(id) }, []
     )
@@ -119,12 +117,14 @@ const App = () => {
                         'add': <Modal onModalClose={handleModalClose}>
                             <AddMovie
                                 genres={filterItems}
+                                onModalClose={handleModalClose}
                             />
                         </Modal>,
                         'edit': <Modal onModalClose={handleModalClose}>
                             <EditMovie
                                 genres={filterItems}
                                 item={searchResultItems.find((item) => (item.id === editMovieID))}
+                                onModalClose={handleModalClose}
                             />
                         </Modal>,
                         'delete': <Modal onModalClose={handleModalClose}>

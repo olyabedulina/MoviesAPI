@@ -3,7 +3,7 @@ export const searchResultItemsData = [
         id: '1111',
         src: require('./movie-posters/movie-1.png'),
         title: 'Avengers: War of Infinity',
-        releaseDate: 2018,
+        releaseDate: '2018',
         genre: [
             {
                 id: '1',
@@ -34,7 +34,7 @@ export const searchResultItemsData = [
         id: '2222',
         src: require('./movie-posters/movie-2.png'),
         title: 'Inception',
-        releaseDate: 2003,
+        releaseDate: '2003',
         genre: [
             {
                 id: '1',
@@ -65,7 +65,7 @@ export const searchResultItemsData = [
         id: '3333',
         src: require('./movie-posters/movie-3.png'),
         title: 'Reservoir Dogs',
-        releaseDate: 1992,
+        releaseDate: '1992',
         genre: [
             {
                 id: '5',
@@ -92,7 +92,7 @@ export const searchResultItemsData = [
         id: '4444',
         src: require('./movie-posters/movie-4.png'),
         title: 'Pulp Fiction',
-        releaseDate: 1994,
+        releaseDate: '1994',
         genre: [
             {
                 id: '6',
@@ -115,7 +115,7 @@ export const searchResultItemsData = [
         id: '5555',
         src: require('./movie-posters/movie-5.png'),
         title: 'Bill: Vol 2',
-        releaseDate: 2004,
+        releaseDate: '2004',
         genre: [
             {
                 id: '5',
@@ -142,7 +142,7 @@ export const searchResultItemsData = [
         id: '6666',
         src: require('./movie-posters/movie-6.png'),
         title: 'Bohemian Rhapsody',
-        releaseDate: 2018,
+        releaseDate: '2018',
         genre: [
             {
                 id: '8',
