@@ -1,4 +1,3 @@
-import { searchResultItemsData } from '../../components/data/searchResultItemsData'
 import { filterItemsData } from '../../components/data/filterItemsData'
 
 const x = {
@@ -17,10 +16,6 @@ const x = {
         "Romance"
     ],
     "runtime": 106
-}
-
-function loadMovies() {
-    return searchResultItemsData
 }
 
 function loadFilterItems() {
@@ -54,8 +49,7 @@ const sortNameToFuncMap = {
 
 const initialState = {
     movieList: [],
-    filterItemsList: [],
-    sortBy: 'date'
+    filterItemsList: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -69,10 +63,9 @@ function rootReducer(state = initialState, action) {
         case 'MOVIE__ADD__DONE':
             return {
                 ...state,
-                // movieList: state.movieList.concat(action.payload)
-                movieList: action.payload
+                 movieList: state.movieList.concat(action.payload)
             }
-        case 'MOVIE__DELETE':
+        case 'MOVIE__DELETE__DONE':
             return {
                 ...state,
                 movieList: state.movieList.filter((item) => (item.id !== action.payload))
@@ -87,23 +80,20 @@ function rootReducer(state = initialState, action) {
                     return item;
                 })
             }
-        case 'MOVIES__SORT':
+        case 'MOVIES__SORT__DONE':
             return {
                 ...state,
-                movieList: state.movieList.sort(sortNameToFuncMap[action.payload]),
-                sortBy: action.payload
+                movieList: action.payload
             }
-        case 'MOVIES__FILTER':
+        case 'MOVIES__FILTER__DONE':
             return {
                 ...state,
-                movieList: state.movieList.filter((item) => {
-                    switch (action.payload) {
-                        case '0':
-                            return true
-                        default:
-                            return item.genre.some(({ id }) => (id === action.payload))
-                    }
-                })
+                movieList: action.payload
+            }
+        case 'MOVIES__SORT__AND__FILTER__DONE':
+            return {
+                ...state,
+                movieList: action.payload
             }
         default:
             return state

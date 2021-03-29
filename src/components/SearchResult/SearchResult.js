@@ -6,7 +6,6 @@ import SearchResultList from './SearchResultList'
 import CM from './styles.pcss'
 
 const SearchResult = ({
-    sortBy,
     items,
     onMovieEdit = Function.prototype,
     onMovieDelete = Function.prototype,
@@ -15,10 +14,9 @@ const SearchResult = ({
 
     return <div className={CM.searchResult}>
         <div className={CM.searchCount}>
-            <strong className={CM.searchCountHightlight}>{items.length}</strong> movies found
+            <strong className={CM.searchCountHightlight}>{(items) ? items.length : 0}</strong> movies found
         </div>
         <SearchResultList
-            sortBy={sortBy}
             items={items}
             onMovieEdit={onMovieEdit}
             onMovieDelete={onMovieDelete}

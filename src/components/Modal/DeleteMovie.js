@@ -9,13 +9,15 @@ import { deleteMovie } from '../../redux/actions'
 import CM from './styles.pcss'
 
 const DeleteMovie = ({
-    item
+    item,
+    onModalClose = Function.prototype
 }) => {
 
     const dispatch = useDispatch()
 
     function handleConfirmClick() {
         dispatch(deleteMovie(item.id))
+        onModalClose()
     }
 
     return <>

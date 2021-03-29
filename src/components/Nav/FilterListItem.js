@@ -2,6 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import CM from './styles.pcss'
+import { useDispatch } from 'react-redux'
+import { filterMoviesBy } from '../../redux/actions'
+
+import { getFilterItems } from '../../redux/selectors'
+import { useSelector } from "react-redux";
 
 const FilterListItem = ({
     data,
@@ -9,10 +14,19 @@ const FilterListItem = ({
     selectedItem,
     onFilterClick
 }) => {
+    const dispatch = useDispatch()
+    const filterItems = useSelector(getFilterItems)
 
     function handleClick(event) {
         event.preventDefault();
         onFilterClick(data.id);
+
+        const filters = filterItems.find(({id}) => (id == data.id)).name
+        dispatch(
+            filterMoviesBy(
+                (filters.includes('All')) ? '' : filters
+            )
+        )
     }
 
     return <li className={(data.id === selectedItem) ? `${CM.resultsFilterItem} ${CM.selected}`: `${CM.resultsFilterItem}`}>

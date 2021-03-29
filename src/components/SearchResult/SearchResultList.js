@@ -5,34 +5,8 @@ import SearchResultListItem from './SearchResultListItem'
 
 import CM from './styles.pcss'
 
-function sortByDate(movieA, movieB) {
-    if (movieA.releaseDate < movieB.releaseDate) {
-        return 1;
-    }
-    if (movieA.releaseDate > movieB.releaseDate) {
-        return -1;
-    }
-    return 0;
-}
-
-function sortByTitle(movieA, movieB) {
-    if (movieA.title < movieB.title) {
-        return -1;
-    }
-    if (movieA.title > movieB.title) {
-        return 1;
-    }
-    return 0;
-}
-
-const sortNameToFuncMap = {
-    date: sortByDate,
-    title: sortByTitle
-}
-
 const SearchResultList = ({
     items,
-    sortBy, // 'date' | 'title'
     onMovieEdit = Function.prototype,
     onMovieDelete = Function.prototype,
     onMovieImageClick = Function.prototype
@@ -40,7 +14,8 @@ const SearchResultList = ({
 
   return (items.length > 0) ? <ul className={CM.moviesList}>
       {
-          items.sort(sortNameToFuncMap[sortBy]).map((item, index) => <SearchResultListItem
+          // items.sort(sortNameToFuncMap[sortBy]).map((item, index) => <SearchResultListItem
+          items.map((item, index) => <SearchResultListItem
               key={item.id}
               data={item}
               index={index}

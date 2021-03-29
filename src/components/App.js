@@ -23,9 +23,11 @@ const App = () => {
 
     const [displayMode, setDisplayMode] = useState('basic');
     const [movieDetailsID, setMovieDetailsID] = useState('');
-    const [movieFilterID, setMovieFilterID] = usePersistentState('0', 'movieFilter');
+    // const [movieFilterID, setMovieFilterID] = usePersistentState('', 'movieFilter');
+    const [movieFilterID, setMovieFilterID] = useState('');
 
-    const [sortBy, setSortBy] = usePersistentState('date', 'sortBy')
+    // const [sortBy, setSortBy] = usePersistentState('date', 'sortBy')
+    const [sortBy, setSortBy] = useState('date')
     function handleSortChange(nextSortBy) {
         setSortBy(nextSortBy)
     }
@@ -96,20 +98,10 @@ const App = () => {
                     onIsOpenedDropdownChange={handleIsOpenedDropdownChange}
                 />
                 <SearchResult
-                    sortBy={sortBy}
                     onMovieEdit={handleEditMovie}
                     onMovieDelete={handleDeleteMovie}
                     onMovieImageClick={handleMovieImageClickCallback}
-                    items={
-                        searchResultItems.filter((item) => {
-                            switch (movieFilterID) {
-                                case '0':
-                                    return true
-                                default:
-                                    return item.genre.some(({ id }) => (id === movieFilterID))
-                            }
-                        })
-                    }
+                    items={searchResultItems}
                 />
                 <Footer/>
                 {
@@ -120,16 +112,17 @@ const App = () => {
                                 onModalClose={handleModalClose}
                             />
                         </Modal>,
-                        'edit': <Modal onModalClose={handleModalClose}>
-                            <EditMovie
-                                genres={filterItems}
-                                item={searchResultItems.find((item) => (item.id === editMovieID))}
-                                onModalClose={handleModalClose}
-                            />
-                        </Modal>,
+                        // 'edit': <Modal onModalClose={handleModalClose}>
+                        //     <EditMovie
+                        //         genres={filterItems}
+                        //         item={searchResultItems.find((item) => (item.id === editMovieID))}
+                        //         onModalClose={handleModalClose}
+                        //     />
+                        // </Modal>,
                         'delete': <Modal onModalClose={handleModalClose}>
                             <DeleteMovie
                                 item={searchResultItems.find((item) => (item.id === deleteMovieID))}
+                                onModalClose={handleModalClose}
                             />
                         </Modal>,
                     }[displayMode]

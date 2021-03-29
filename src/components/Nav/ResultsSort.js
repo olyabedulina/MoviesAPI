@@ -29,7 +29,7 @@ const ResultsSort = ({
                 isOpened={isOpenedDropdown}
                 onIsOpenedChange={onIsOpenedDropdownChange}
             >
-                <div onClick={() => { onSortChange('date'); dispatch(sortMoviesBy('date')); onIsOpenedDropdownChange() }}>Release date</div>
+                <div onClick={() => { onSortChange('date'); dispatch(sortMoviesBy('release_date')); onIsOpenedDropdownChange() }}>Release date</div>
                 <div onClick={() => { onSortChange('title'); dispatch(sortMoviesBy('title')); onIsOpenedDropdownChange() }}>Title</div>
             </DropdownControlled>
         </div>

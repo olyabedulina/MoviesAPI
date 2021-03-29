@@ -1,4 +1,8 @@
-import { loadMovies as loadMoviesService, addMovie as addMovieService } from '../../services'
+import {
+    loadMovies as loadMoviesService,
+    addMovie as addMovieService,
+    deleteMovie as deleteMovieService
+} from '../../services'
 
 export function loadMovies() {
     return (dispatch) => {
@@ -6,7 +10,7 @@ export function loadMovies() {
             type: 'MOVIES__LOAD__INIT'
         })
 
-        loadMoviesService().then((moviesData) => {
+        loadMoviesService({sortBy: 'date', sortOrder: 'asc', filters: ''}).then((moviesData) => {
             dispatch({
                 type: 'MOVIES__LOAD__DONE',
                 payload: moviesData
@@ -24,13 +28,18 @@ export function initApp() {
     }
 }
 
-export function addMoviePostToServer(movieInfo) {
+export function addMovie(movieInfo) {
     return (dispatch) => {
+        dispatch({
+            type: 'MOVIE__ADD'
+        })
+
         dispatch({
             type: 'MOVIE__ADD__INIT'
         })
 
         addMovieService(movieInfo).then((moviesData) => {
+            // console.log(123, moviesData)
             dispatch({
                 type: 'MOVIE__ADD__DONE',
                 payload: moviesData
@@ -39,23 +48,18 @@ export function addMoviePostToServer(movieInfo) {
     }
 }
 
-export function addMovie(movieInfo) {
-    // return {
-    //     type: 'MOVIE__ADD',
-    //     payload: movieInfo
-    // }
+export function deleteMovie(movieId) {
     return (dispatch) => {
         dispatch({
-            type: 'MOVIE__ADD'
+            type: 'MOVIE__DELETE__INIT'
         })
-        dispatch(addMoviePostToServer(movieInfo))
-    }
-}
 
-export function deleteMovie(movieId) {
-    return {
-        type: 'MOVIE__DELETE',
-        payload: movieId
+        deleteMovieService(movieId).then(() => {
+            dispatch({
+                type: 'MOVIE__DELETE__DONE',
+                payload: movieId
+            })
+        })
     }
 }
 
@@ -66,16 +70,48 @@ export function editMovie(movieInfo) {
     }
 }
 
-export function sortMoviesBy(criterion) {
-    return {
-        type: 'MOVIES__SORT',
-        payload: criterion
+export function sortMoviesBy(sortBy) {
+    return (dispatch) => {
+        dispatch({
+            type: 'MOVIES__SORT__INIT'
+        })
+
+        loadMoviesService({sortBy: sortBy, sortOrder: 'asc'}).then((moviesData) => {
+            dispatch({
+                type: 'MOVIES__SORT__DONE',
+                payload: moviesData
+            })
+        })
     }
 }
 
-export function filterMoviesBy(movieFilterID) {
-    return {
-        type: 'MOVIES__FILTER',
-        payload: movieFilterID
+export function filterMoviesBy(filters) {
+    return (dispatch) => {
+        dispatch({
+            type: 'MOVIES__FILTER__INIT'
+        })
+
+        loadMoviesService({filters: filters}).then((moviesData) => {
+            dispatch({
+                type: 'MOVIES__FILTER__DONE',
+                payload: moviesData
+            })
+        })
+    }
+}
+
+// TODO: implement sort and filter Movies simultaneously
+export function sortAndFilterMoviesBy({ sortBy, filters }) {
+    return (dispatch) => {
+        dispatch({
+            type: 'MOVIES__SORT__AND__FILTER__INIT'
+        })
+
+        loadMoviesService({sortBy: sortBy, sortOrder: 'asc', filters: filters}).then((moviesData) => {
+            dispatch({
+                type: 'MOVIES__SORT__AND__FILTER__DONE',
+                payload: moviesData
+            })
+        })
     }
 }
