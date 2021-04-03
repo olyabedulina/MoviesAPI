@@ -9,7 +9,8 @@ import { sortMoviesBy } from '../../redux/actions'
 
 const sortNameToDisplayNameMap = {
     date: 'Release date',
-    title: 'Title'
+    title: 'Title',
+    vote_average: 'Rating'
 }
 
 const ResultsSort = ({
@@ -31,6 +32,7 @@ const ResultsSort = ({
             >
                 <div onClick={() => { onSortChange('date'); dispatch(sortMoviesBy('release_date')); onIsOpenedDropdownChange() }}>Release date</div>
                 <div onClick={() => { onSortChange('title'); dispatch(sortMoviesBy('title')); onIsOpenedDropdownChange() }}>Title</div>
+                <div onClick={() => { onSortChange('vote_average'); dispatch(sortMoviesBy('vote_average')); onIsOpenedDropdownChange() }}>Rating</div>
             </DropdownControlled>
         </div>
 

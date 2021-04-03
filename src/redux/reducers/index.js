@@ -42,9 +42,20 @@ function sortByTitle(movieA, movieB) {
     return 0;
 }
 
+function sortByRating(movieA, movieB) {
+    if (movieA.vote_average < movieB.vote_average) {
+        return 1;
+    }
+    if (movieA.vote_average > movieB.vote_average) {
+        return -1;
+    }
+    return 0;
+}
+
 const sortNameToFuncMap = {
     date: sortByDate,
-    title: sortByTitle
+    title: sortByTitle,
+    vote_average: sortByRating
 }
 
 const initialState = {
