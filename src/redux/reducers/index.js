@@ -22,42 +22,6 @@ function loadFilterItems() {
     return filterItemsData
 }
 
-function sortByDate(movieA, movieB) {
-    if (movieA.releaseDate < movieB.releaseDate) {
-        return 1;
-    }
-    if (movieA.releaseDate > movieB.releaseDate) {
-        return -1;
-    }
-    return 0;
-}
-
-function sortByTitle(movieA, movieB) {
-    if (movieA.title < movieB.title) {
-        return -1;
-    }
-    if (movieA.title > movieB.title) {
-        return 1;
-    }
-    return 0;
-}
-
-function sortByRating(movieA, movieB) {
-    if (movieA.vote_average < movieB.vote_average) {
-        return 1;
-    }
-    if (movieA.vote_average > movieB.vote_average) {
-        return -1;
-    }
-    return 0;
-}
-
-const sortNameToFuncMap = {
-    date: sortByDate,
-    title: sortByTitle,
-    vote_average: sortByRating
-}
-
 const initialState = {
     movieList: [],
     filterItemsList: [],
