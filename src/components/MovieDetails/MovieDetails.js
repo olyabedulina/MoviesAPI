@@ -37,7 +37,7 @@ const MovieDetails = ({
                 { movie.vote_average ? <div className={CM.movieRating}>{movie.vote_average}</div> : '' }
                 <div className={CM.movieGenre}>{movie.genres.map((name) => name).join(', ')}</div>
                 <div className={CM.movieReleaseYear}>{movie.release_date}</div>
-                <div className={CM.movieDuration}>{`${movie.runtime} min`}</div>
+                { movie.runtime ? <div className={CM.movieDuration}>{`${movie.runtime} min`}</div> : '' }
                 <div className={CM.movieDescription}>{movie.overview}</div>
             </div>
         </div>

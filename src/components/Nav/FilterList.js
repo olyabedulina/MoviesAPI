@@ -8,7 +8,9 @@ import CM from './styles.pcss'
 const FilterList = ({
     items,
     selectedItem,
-    onFilterClick
+    filters,
+    sortBy={sortBy},
+    sortOrder={sortOrder}
 }) => {
 
     return (items.length > 0) ? <ul className={CM.resultsFilter}>
@@ -18,7 +20,9 @@ const FilterList = ({
                     data={item}
                     index={index}
                     selectedItem={selectedItem}
-                    onFilterClick={onFilterClick}
+                    filters={filters}
+                    sortBy={sortBy}
+                    sortOrder={sortOrder}
                 />
             )
         }
@@ -38,8 +42,7 @@ FilterList.propTypes = {
             isIncludedInFilter: PropTypes.bool
         })
     ).isRequired,
-    selectedItem: PropTypes.string,
-    onFilterClick: PropTypes.func
+    selectedItem: PropTypes.string
 };
 
 export default FilterList

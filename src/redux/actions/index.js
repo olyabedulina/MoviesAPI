@@ -12,7 +12,7 @@ export function loadMovies() {
             type: 'MOVIES__LOAD__INIT'
         })
 
-        loadMoviesService({sortBy: 'date', sortOrder: 'asc', filters: ''}).then((moviesData) => {
+        loadMoviesService({sortBy: 'release_date', sortOrder: 'desc', filters: ''}).then((moviesData) => {
             dispatch({
                 type: 'MOVIES__LOAD__DONE',
                 payload: moviesData
@@ -96,22 +96,27 @@ export function getMovie(movieId) {
     }
 }
 
-export function sortMoviesBy(sortBy) {
+export function sortMoviesBy(sortBy, sortOrder) {
     return (dispatch) => {
         dispatch({
             type: 'MOVIES__SORT__INIT'
         })
 
-        loadMoviesService({sortBy: sortBy, sortOrder: 'asc'}).then((moviesData) => {
+        loadMoviesService({sortBy: sortBy, sortOrder: sortOrder}).then((moviesData) => {
             dispatch({
                 type: 'MOVIES__SORT__DONE',
-                payload: moviesData
+                payload:
+                    {
+                        moviesData: moviesData,
+                        sortBy: sortBy,
+                        sortOrder: sortOrder
+                    }
             })
         })
     }
 }
 
-export function filterMoviesBy(filters) {
+export function filterMoviesBy(filters, movieFilterID) {
     return (dispatch) => {
         dispatch({
             type: 'MOVIES__FILTER__INIT'
@@ -120,23 +125,34 @@ export function filterMoviesBy(filters) {
         loadMoviesService({filters: filters}).then((moviesData) => {
             dispatch({
                 type: 'MOVIES__FILTER__DONE',
-                payload: moviesData
+                payload:
+                    {
+                        moviesData: moviesData,
+                        movieFilterID: movieFilterID,
+                        filters: filters
+                    }
             })
         })
     }
 }
 
-// TODO: implement sort and filter Movies simultaneously
-export function sortAndFilterMoviesBy({ sortBy, filters }) {
+export function sortAndFilterMoviesBy(sortBy, sortOrder, filters, movieFilterID) {
     return (dispatch) => {
         dispatch({
             type: 'MOVIES__SORT__AND__FILTER__INIT'
         })
 
-        loadMoviesService({sortBy: sortBy, sortOrder: 'asc', filters: filters}).then((moviesData) => {
+        loadMoviesService({sortBy: sortBy, sortOrder: sortOrder, filters: filters}).then((moviesData) => {
             dispatch({
                 type: 'MOVIES__SORT__AND__FILTER__DONE',
-                payload: moviesData
+                payload:
+                    {
+                        moviesData: moviesData,
+                        sortBy: sortBy,
+                        sortOrder: sortOrder,
+                        movieFilterID: movieFilterID,
+                        filters: filters
+                    }
             })
         })
     }

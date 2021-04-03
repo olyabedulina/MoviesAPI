@@ -19,20 +19,16 @@ import { initApp } from '../redux/actions'
 import { getSearchResultItems } from '../redux/selectors'
 import { getFilterItems } from '../redux/selectors'
 import { getCurrentMovie } from '../redux/selectors'
+import { getSortBy } from '../redux/selectors'
+import { getSortOrder } from '../redux/selectors'
+import { getFilters } from '../redux/selectors'
+import { getSelectedItem } from '../redux/selectors'
 
 const App = () => {
     const dispatch = useDispatch()
 
     const [displayMode, setDisplayMode] = useState('basic');
     const [movieDetailsID, setMovieDetailsID] = useState('');
-    // const [movieFilterID, setMovieFilterID] = usePersistentState('', 'movieFilter');
-    const [movieFilterID, setMovieFilterID] = useState('');
-
-    // const [sortBy, setSortBy] = usePersistentState('date', 'sortBy')
-    const [sortBy, setSortBy] = useState('date')
-    function handleSortChange(nextSortBy) {
-        setSortBy(nextSortBy)
-    }
 
     const [isOpenedDropdown, setIsOpenedDropdown] = useState(false)
     function handleIsOpenedDropdownChange() {
@@ -49,6 +45,10 @@ const App = () => {
     const searchResultItems = useSelector(getSearchResultItems)
     const filterItems = useSelector(getFilterItems)
     const currentMovie = useSelector(getCurrentMovie)
+    const sortBy = useSelector(getSortBy)
+    const sortOrder = useSelector(getSortOrder)
+    const filters = useSelector(getFilters)
+    const movieFilterID = useSelector(getSelectedItem)
 
     /* ----------- end Put uploaded data into States ----------- */
 
@@ -78,15 +78,10 @@ const App = () => {
         setMovieDetailsID('');
     }
 
-    function handleFilterClick(id) {
-        setMovieFilterID(id)
-    }
-
     return <>
         <ErrorBoundary>
             <div className="app">
                 { (movieDetailsID && currentMovie) ? <MovieDetails
-                    // movie={searchResultItems.find((item) => (item.id === movieDetailsID))}
                     movie={currentMovie}
                     onMagnifierClick={handleMagnifierClick}
                 /> : <Header
@@ -95,9 +90,9 @@ const App = () => {
                 <Nav
                     items={filterItems.filter((item) => (item.isIncludedInFilter))}
                     selectedItem={movieFilterID}
+                    filters={filters}
                     sortBy={sortBy}
-                    onSortChange={handleSortChange}
-                    onFilterClick={handleFilterClick}
+                    sortOrder={sortOrder}
                     isOpenedDropdown={isOpenedDropdown}
                     onIsOpenedDropdownChange={handleIsOpenedDropdownChange}
                 />

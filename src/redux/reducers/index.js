@@ -25,7 +25,11 @@ function loadFilterItems() {
 const initialState = {
     movieList: [],
     filterItemsList: [],
-    currentMovie: null
+    currentMovie: null,
+    sortBy: 'release_date',
+    sortOrder: 'desc',
+    movieFilterID: '',
+    filters: ''
 }
 
 function rootReducer(state = initialState, action) {
@@ -64,17 +68,25 @@ function rootReducer(state = initialState, action) {
         case 'MOVIES__SORT__DONE':
             return {
                 ...state,
-                movieList: action.payload
+                movieList: action.payload.moviesData,
+                sortBy: action.payload.sortBy,
+                sortOrder: action.payload.sortOrder
             }
         case 'MOVIES__FILTER__DONE':
             return {
                 ...state,
-                movieList: action.payload
+                movieList: action.payload.moviesData,
+                movieFilterID: action.payload.movieFilterID,
+                filters: action.payload.filters
             }
         case 'MOVIES__SORT__AND__FILTER__DONE':
             return {
                 ...state,
-                movieList: action.payload
+                movieList: action.payload.moviesData,
+                sortBy: action.payload.sortBy,
+                sortOrder: action.payload.sortOrder,
+                movieFilterID: action.payload.movieFilterID,
+                filters: action.payload.filters
             }
         default:
             return state

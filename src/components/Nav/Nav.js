@@ -9,9 +9,9 @@ import CM from './styles.pcss'
 const Nav = ({
     items,
     selectedItem,
+    filters,
     sortBy,
-    onSortChange,
-    onFilterClick,
+    sortOrder,
     isOpenedDropdown,
     onIsOpenedDropdownChange
 }) => {
@@ -20,11 +20,15 @@ const Nav = ({
         <FilterList
             items={items}
             selectedItem={selectedItem}
-            onFilterClick={onFilterClick}
+            filters={filters}
+            sortBy={sortBy}
+            sortOrder={sortOrder}
         />
         <ResultsSort
             sortBy={sortBy}
-            onSortChange={onSortChange}
+            sortOrder={sortOrder}
+            selectedItem={selectedItem}
+            filters={filters}
             isOpenedDropdown={isOpenedDropdown}
             onIsOpenedDropdownChange={onIsOpenedDropdownChange}
         />
@@ -41,8 +45,7 @@ Nav.propTypes = {
     ).isRequired,
     selectedItem: PropTypes.string,
     sortBy: PropTypes.string,
-    onSortChange: PropTypes.func,
-    onFilterClick: PropTypes.func,
+    sortOrder: PropTypes.string,
     isOpenedDropdown: PropTypes.bool,
     onIsOpenedDropdownChange : PropTypes.func
 };
