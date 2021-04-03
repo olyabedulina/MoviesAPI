@@ -5,3 +5,7 @@ export function getSearchResultItems(state) {
 export function getFilterItems(state) {
     return state.filterItemsList
 }
+
+export function getCurrentMovie(state) {
+    return state.currentMovie
+}

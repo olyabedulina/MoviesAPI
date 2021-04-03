@@ -1,6 +1,8 @@
 import {
     loadMovies as loadMoviesService,
     addMovie as addMovieService,
+    editMovie as editMovieService,
+    getMovie as getMovieService,
     deleteMovie as deleteMovieService
 } from '../../services'
 
@@ -48,6 +50,22 @@ export function addMovie(movieInfo) {
     }
 }
 
+export function editMovie(movieInfo) {
+    return (dispatch) => {
+        dispatch({
+            type: 'MOVIE__EDIT__INIT'
+        })
+
+        editMovieService(movieInfo).then((moviesData) => {
+            // console.log(123, moviesData)
+            dispatch({
+                type: 'MOVIE__EDIT__DONE',
+                payload: moviesData
+            })
+        })
+    }
+}
+
 export function deleteMovie(movieId) {
     return (dispatch) => {
         dispatch({
@@ -63,10 +81,18 @@ export function deleteMovie(movieId) {
     }
 }
 
-export function editMovie(movieInfo) {
-    return {
-        type: 'MOVIE__EDIT',
-        payload: movieInfo
+export function getMovie(movieId) {
+    return (dispatch) => {
+        dispatch({
+            type: 'MOVIE__GET__INIT'
+        })
+
+        getMovieService(movieId).then((movieData) => {
+            dispatch({
+                type: 'MOVIE__GET__DONE',
+                payload: movieData
+            })
+        })
     }
 }
 

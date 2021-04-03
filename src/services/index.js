@@ -14,7 +14,6 @@ export function loadMovies({
             sortOrder: sortOrder
         }
         }).then(response => {
-        // debugger;
         return response.data.data
     })
 }
@@ -28,9 +27,21 @@ export function addMovie(movieInfo) {
         .then(response => response.data)
 }
 
+export function editMovie(movieInfo) {
+    const headers = {
+        'Content-Type': 'application/json'
+    }
+
+    return axios.put(`${baseUrl}/movies`, movieInfo, { headers })
+        .then(response => response.data)
+}
+
 export function deleteMovie(movieId) {
-    // console.log(`${baseUrl}/movies/${movieId}`)
-    // debugger
     return axios.delete(`${baseUrl}/movies/${movieId}`)
+        .then(response => response.data)
+}
+
+export function getMovie(movieId) {
+    return axios.get(`${baseUrl}/movies/${movieId}`)
         .then(response => response.data)
 }

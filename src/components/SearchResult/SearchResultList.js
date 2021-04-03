@@ -1,5 +1,5 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 import SearchResultListItem from './SearchResultListItem'
 
@@ -28,32 +28,24 @@ const SearchResultList = ({
     </ul> : <div className={CM.emptyResult}>No movie found</div>
 }
 
-// SearchResultList.propTypes = {
-//     items: PropTypes.arrayOf(
-//         PropTypes.shape({
-//             id: PropTypes.string,
-//             src: PropTypes.string,
-//             title: PropTypes.string,
-//             releaseDate: PropTypes.string,
-//             genre: PropTypes.arrayOf(
-//                 PropTypes.shape({
-//                     id: PropTypes.string,
-//                     text: PropTypes.string,
-//                 })
-//             ),
-//             rating: PropTypes.string,
-//             movieDuration: PropTypes.shape({
-//                 timing: PropTypes.number,
-//                 units: PropTypes.string
-//             }),
-//             url: PropTypes.string,
-//             description: PropTypes.string
-//         })
-//     ).isRequired,
-//     sortBy: PropTypes.string,
-//     onMovieEdit : PropTypes.func,
-//     onMovieDelete : PropTypes.func,
-//     onMovieImageClick: PropTypes.func
-// };
+SearchResultList.propTypes = {
+    items: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            poster_path: PropTypes.string,
+            title: PropTypes.string,
+            tagline: PropTypes.string,
+            release_date: PropTypes.string,
+            genres: PropTypes.arrayOf(PropTypes.string),
+            vote_average: PropTypes.number,
+            vote_count: PropTypes.number,
+            runtime: PropTypes.number,
+            overview: PropTypes.string
+        })
+    ).isRequired,
+    onMovieEdit : PropTypes.func,
+    onMovieDelete : PropTypes.func,
+    onMovieImageClick: PropTypes.func
+};
 
 export default SearchResultList

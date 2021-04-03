@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 import Popup from '../Popup'
 
 import CM from './styles.pcss'
+
+import { getMovie } from '../../redux/actions'
+import { useDispatch } from 'react-redux'
 
 const SearchResultListItem = ({
     data,
@@ -13,6 +16,8 @@ const SearchResultListItem = ({
     onMovieImageClick = Function.prototype,
 }) => {
     const [displayPopup, setDisplayPopup] = useState(false);
+
+    const dispatch = useDispatch()
 
     function handleMovieOptionsClick() {
         setDisplayPopup(true);
@@ -24,6 +29,7 @@ const SearchResultListItem = ({
 
     function handleMovieImageClick() {
         onMovieImageClick(data.id)
+        dispatch(getMovie(data.id))
     }
 
     return <li className={`${CM.moviesListItem} ${CM.movie}`}>
@@ -51,30 +57,23 @@ const SearchResultListItem = ({
     </li>
 }
 
-// SearchResultListItem.propTypes = {
-//     data: PropTypes.shape({
-//         id: PropTypes.string,
-//         src: PropTypes.string,
-//         title: PropTypes.string,
-//         releaseDate: PropTypes.string,
-//         genre: PropTypes.arrayOf(
-//             PropTypes.shape({
-//                 id: PropTypes.string,
-//                 name: PropTypes.string,
-//             })
-//         ),
-//         rating: PropTypes.string,
-//         movieDuration: PropTypes.shape({
-//             timing: PropTypes.number,
-//             units: PropTypes.string
-//         }),
-//         url: PropTypes.string,
-//         description: PropTypes.string
-//     }).isRequired,
-//     index: PropTypes.number,
-//     onMovieEdit : PropTypes.func,
-//     onMovieDelete : PropTypes.func,
-//     onMovieImageClick: PropTypes.func
-// };
+SearchResultListItem.propTypes = {
+    data: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        poster_path: PropTypes.string,
+        title: PropTypes.string,
+        tagline: PropTypes.string,
+        release_date: PropTypes.string,
+        genres: PropTypes.arrayOf(PropTypes.string),
+        vote_average: PropTypes.number,
+        vote_count: PropTypes.number,
+        runtime: PropTypes.number,
+        overview: PropTypes.string
+    }).isRequired,
+    index: PropTypes.number,
+    onMovieEdit : PropTypes.func,
+    onMovieDelete : PropTypes.func,
+    onMovieImageClick: PropTypes.func
+};
 
 export default SearchResultListItem

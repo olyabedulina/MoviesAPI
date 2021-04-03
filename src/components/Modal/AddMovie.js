@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 import { useDispatch } from 'react-redux'
 
@@ -169,28 +169,18 @@ const AddMovie = ({
     </>
 }
 
-// AddMovie.propTypes = {
-//     selectedGenresArray: PropTypes.shape({
-//         id: PropTypes.string,
-//         src: PropTypes.string,
-//         title: PropTypes.string,
-//         releaseDate: PropTypes.string,
-//         genre: PropTypes.arrayOf(
-//             PropTypes.shape({
-//                 id: PropTypes.string,
-//                 name: PropTypes.string,
-//             })
-//         ),
-//         rating: PropTypes.string,
-//         movieDuration: PropTypes.shape({
-//             timing: PropTypes.number,
-//             units: PropTypes.string
-//         }),
-//         url: PropTypes.string,
-//         description: PropTypes.string
-//     }),
-//     genres: PropTypes.array,
-//     children: PropTypes.node
-// };
+AddMovie.propTypes = {
+    children: PropTypes.node,
+    selectedGenresArray: PropTypes.array,
+    genres: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string,
+            name: PropTypes.string,
+            isSelected: PropTypes.bool,
+            isIncludedInFilter: PropTypes.bool
+        })
+    ),
+    onModalClose: PropTypes.func
+};
 
 export default AddMovie

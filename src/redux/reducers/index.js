@@ -49,7 +49,8 @@ const sortNameToFuncMap = {
 
 const initialState = {
     movieList: [],
-    filterItemsList: []
+    filterItemsList: [],
+    currentMovie: null
 }
 
 function rootReducer(state = initialState, action) {
@@ -65,12 +66,17 @@ function rootReducer(state = initialState, action) {
                 ...state,
                  movieList: state.movieList.concat(action.payload)
             }
+        case 'MOVIE__GET__DONE':
+            return {
+                ...state,
+                currentMovie: action.payload
+            }
         case 'MOVIE__DELETE__DONE':
             return {
                 ...state,
                 movieList: state.movieList.filter((item) => (item.id !== action.payload))
             }
-        case 'MOVIE__EDIT':
+        case 'MOVIE__EDIT__DONE':
             return {
                 ...state,
                 movieList: state.movieList.map(function(item) {

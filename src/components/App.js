@@ -15,8 +15,10 @@ import EditMovie from './Modal/EditMovie'
 import DeleteMovie from './Modal/DeleteMovie'
 
 import { initApp } from '../redux/actions'
+
 import { getSearchResultItems } from '../redux/selectors'
 import { getFilterItems } from '../redux/selectors'
+import { getCurrentMovie } from '../redux/selectors'
 
 const App = () => {
     const dispatch = useDispatch()
@@ -46,6 +48,7 @@ const App = () => {
 
     const searchResultItems = useSelector(getSearchResultItems)
     const filterItems = useSelector(getFilterItems)
+    const currentMovie = useSelector(getCurrentMovie)
 
     /* ----------- end Put uploaded data into States ----------- */
 
@@ -82,8 +85,9 @@ const App = () => {
     return <>
         <ErrorBoundary>
             <div className="app">
-                { movieDetailsID.length ? <MovieDetails
-                    movie={searchResultItems.find((item) => (item.id === movieDetailsID))}
+                { (movieDetailsID && currentMovie) ? <MovieDetails
+                    // movie={searchResultItems.find((item) => (item.id === movieDetailsID))}
+                    movie={currentMovie}
                     onMagnifierClick={handleMagnifierClick}
                 /> : <Header
                     onAddNewMovie={handleAddNewMovie}
@@ -112,13 +116,13 @@ const App = () => {
                                 onModalClose={handleModalClose}
                             />
                         </Modal>,
-                        // 'edit': <Modal onModalClose={handleModalClose}>
-                        //     <EditMovie
-                        //         genres={filterItems}
-                        //         item={searchResultItems.find((item) => (item.id === editMovieID))}
-                        //         onModalClose={handleModalClose}
-                        //     />
-                        // </Modal>,
+                        'edit': <Modal onModalClose={handleModalClose}>
+                            <EditMovie
+                                genres={filterItems}
+                                item={searchResultItems.find((item) => (item.id === editMovieID))}
+                                onModalClose={handleModalClose}
+                            />
+                        </Modal>,
                         'delete': <Modal onModalClose={handleModalClose}>
                             <DeleteMovie
                                 item={searchResultItems.find((item) => (item.id === deleteMovieID))}
