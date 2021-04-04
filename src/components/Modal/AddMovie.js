@@ -11,38 +11,7 @@ import CM from './styles.pcss'
 import { addMovie } from '../../redux/actions'
 
 import { useFormik } from 'formik';
-
-const validate = values => {
-    const errors = {};
-
-    if (!values.title) {
-        errors.title = 'Title is required';
-    }
-
-    if (!values.movieURL) {
-        errors.movieURL = 'Movie URL is required';
-    } else if (!/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/i.test(values.movieURL)) {
-        errors.movieURL = 'Invalid url';
-    }
-
-    if (!values.overview) {
-        errors.overview = 'Overview is required';
-    }
-
-    if (!values.selectDate) {
-        errors.selectDate = 'Release date is required';
-    }
-
-    if (!values.runtime) {
-        errors.runtime = 'Runtime is required';
-    } else if (isNaN(values.runtime)) {
-        errors.runtime = 'Runtime must be a number';
-    } else if (!isNaN(values.runtime) && (values.runtime < 0) ) {
-        errors.runtime = 'Runtime must be more than 0';
-    }
-
-    return errors;
-};
+import * as Yup from 'yup';
 
 const AddMovie = ({
     children,
@@ -53,12 +22,6 @@ const AddMovie = ({
 
     const [selectedGenres, setSelectedGenres] = useState(selectedGenresArray)
     const [selectedGenresError, setSelectedGenresError] = useState(false)
-    const [movieTitleValue, setMovieTitleValue] = useState('')
-    const [movieDateValue, setMovieDateValue] = useState('')
-    const [movieUrlValue, setMovieUrlValue] = useState('')
-    const [movieOverviewValue, setMovieOverviewValue] = useState('')
-    const [movieRuntimeValue, setMovieRuntimeValue] = useState('')
-
     const [movieIsSaved, setMovieIsSaved] = useState(false)
 
     const dispatch = useDispatch()
@@ -76,15 +39,6 @@ const AddMovie = ({
     }
 
     function handleSubmitClick() {
-        // const newMovie = {
-        //     title: movieTitleValue,
-        //     release_date: movieDateValue,
-        //     poster_path: movieUrlValue,
-        //     overview: movieOverviewValue,
-        //     runtime: parseInt(movieRuntimeValue),
-        //     genres: genres.filter(({ id }) => (selectedGenres.includes(id))).map(({ name }) => name)
-        // }
-
         if (selectedGenres.length === 0) {
             setSelectedGenresError(true)
             return
@@ -106,26 +60,6 @@ const AddMovie = ({
         setMovieIsSaved(true)
     }
 
-    function handleMovieTitleChange(event) {
-        setMovieTitleValue(event.target.value)
-    }
-
-    function handleMovieDateChange(event) {
-        setMovieDateValue(event.target.value)
-    }
-
-    function handleMovieUrlChange(event) {
-        setMovieUrlValue(event.target.value)
-    }
-
-    function handleMovieOverviewChange(event) {
-        setMovieOverviewValue(event.target.value)
-    }
-
-    function handleMovieRuntimeChange(event) {
-        setMovieRuntimeValue(event.target.value)
-    }
-
     const formik = useFormik({
         initialValues: {
             title: '',
@@ -134,9 +68,25 @@ const AddMovie = ({
             overview: '',
             runtime: ''
         },
-        validate,
+        validationSchema: Yup.object({
+            title: Yup.string()
+                .max(500, 'Must be 500 characters or less')
+                .required('Title is required'),
+            movieURL: Yup.string()
+                .matches(
+                    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                    'Enter correct movie URL!'
+                )
+                .required('Movie URL is required'),
+            overview: Yup.string()
+                .max(1000, 'Must be 1000 characters or less')
+                .required('Overview is required'),
+            selectDate: Yup.string().required('Release date is required'),
+            runtime: Yup.number()
+                .positive()
+                .moreThan(0).required('Runtime is required'),
+        }),
         onSubmit: values => {
-            // alert(JSON.stringify(values, null, 2));
             handleSubmitClick()
         },
     });
@@ -152,8 +102,6 @@ const AddMovie = ({
                                 className={CM.fieldInput}
                                 placeholder='Title here'
                                 type='text'
-                                // value={movieTitleValue}
-                                // onChange={handleMovieTitleChange}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.title}
@@ -174,8 +122,6 @@ const AddMovie = ({
                                 className={CM.fieldInput}
                                 placeholder='Select Date'
                                 type='date'
-                                // value={movieDateValue}
-                                // onChange={handleMovieDateChange}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.selectDate}
@@ -196,8 +142,6 @@ const AddMovie = ({
                                 className={CM.fieldInput}
                                 placeholder='Movie URL here'
                                 type='text'
-                                // value={movieUrlValue}
-                                // onChange={handleMovieUrlChange}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.movieURL}
@@ -234,8 +178,6 @@ const AddMovie = ({
                                 className={CM.fieldInput}
                                 placeholder='Overview here'
                                 type='text'
-                                // value={movieOverviewValue}
-                                // onChange={handleMovieOverviewChange}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.overview}
@@ -256,8 +198,6 @@ const AddMovie = ({
                                 className={CM.fieldInput}
                                 placeholder='Runtime here'
                                 type='text'
-                                // value={movieRuntimeValue}
-                                // onChange={handleMovieRuntimeChange}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.runtime}
@@ -279,7 +219,6 @@ const AddMovie = ({
                         type='submit'
                         kind='main'
                         className={CM.modalFooterButton}
-                        // onClick={handleSubmitClick}
                     >
                         Submit
                     </Button>

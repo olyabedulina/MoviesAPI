@@ -8,7 +8,7 @@ import Button from '../Button'
 import CM from './styles.pcss'
 
 import { useDispatch } from "react-redux"
-import {addMovie, editMovie} from '../../redux/actions'
+import { editMovie } from '../../redux/actions'
 
 import { useFormik } from 'formik';
 
@@ -53,11 +53,6 @@ const EditMovie = ({
 
     const [selectedGenres, setSelectedGenres] = useState(genres.filter( ({ name }) => (item.genres.includes(name)) ).map(({ id }) => id) )
     const [selectedGenresError, setSelectedGenresError] = useState(false)
-    const [movieTitleValue, setMovieTitleValue] = useState(item.title)
-    const [movieDateValue, setMovieDateValue] = useState(item.release_date)
-    const [movieUrlValue, setMovieUrlValue] = useState(item.poster_path)
-    const [movieOverviewValue, setMovieOverviewValue] = useState(item.overview)
-    const [movieRuntimeValue, setMovieRuntimeValue] = useState(item.runtime)
 
     const dispatch = useDispatch()
 
@@ -74,19 +69,6 @@ const EditMovie = ({
     }
 
     function handleSubmitClick() {
-        // const updatedMovie = {
-        //     id: item.id,
-        //     title: movieTitleValue,
-        //     release_date: movieDateValue,
-        //     poster_path: movieUrlValue,
-        //     overview: movieOverviewValue,
-        //     runtime: parseInt(movieRuntimeValue),
-        //     genres: genres.filter(({ id }) => (selectedGenres.includes(id))).map(({ name }) => name)
-        // }
-        //
-        // dispatch(editMovie(updatedMovie))
-        // onModalClose()
-
         if (selectedGenres.length === 0) {
             setSelectedGenresError(true)
             return
@@ -106,26 +88,6 @@ const EditMovie = ({
         onModalClose()
     }
 
-    function handleMovieTitleChange(event) {
-        setMovieTitleValue(event.target.value)
-    }
-
-    function handleMovieDateChange(event) {
-        setMovieDateValue(event.target.value)
-    }
-
-    function handleMovieUrlChange(event) {
-        setMovieUrlValue(event.target.value)
-    }
-
-    function handleMovieOverviewChange(event) {
-        setMovieOverviewValue(event.target.value)
-    }
-
-    function handleMovieRuntimeChange(event) {
-        setMovieRuntimeValue(event.target.value)
-    }
-
     const formik = useFormik({
         initialValues: {
             title: item.title,
@@ -136,7 +98,6 @@ const EditMovie = ({
         },
         validate,
         onSubmit: values => {
-            // alert(JSON.stringify(values, null, 2));
             handleSubmitClick()
         },
     });
@@ -161,8 +122,6 @@ const EditMovie = ({
                             className={CM.fieldInput}
                             placeholder='Title here'
                             type='text'
-                            // value={movieTitleValue}
-                            // onChange={handleMovieTitleChange}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.title}
@@ -183,8 +142,6 @@ const EditMovie = ({
                             className={CM.fieldInput}
                             placeholder='Select Date'
                             type='date'
-                            // value={movieDateValue}
-                            // onChange={handleMovieDateChange}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.selectDate}
@@ -205,8 +162,6 @@ const EditMovie = ({
                             className={CM.fieldInput}
                             placeholder='Movie URL here'
                             type='text'
-                            // value={movieUrlValue}
-                            // onChange={handleMovieUrlChange}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.movieURL}
@@ -243,8 +198,6 @@ const EditMovie = ({
                             className={CM.fieldInput}
                             placeholder='Overview here'
                             type='text'
-                            // value={movieOverviewValue}
-                            // onChange={handleMovieOverviewChange}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.overview}
@@ -265,8 +218,6 @@ const EditMovie = ({
                             className={CM.fieldInput}
                             placeholder='Runtime here'
                             type='text'
-                            // value={movieRuntimeValue}
-                            // onChange={handleMovieRuntimeChange}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.runtime}
@@ -287,7 +238,6 @@ const EditMovie = ({
                 <Button
                     type='submit'
                     kind='main'
-                    // onClick={handleSubmitClick}
                     className={CM.modalFooterButton}>
                     Submit
                 </Button>
