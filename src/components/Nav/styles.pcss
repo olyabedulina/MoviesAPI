@@ -48,42 +48,12 @@
   text-transform: uppercase;
 
   &Label {
-    padding: 20px 30px 20px 0;
+    padding: 20px 13px 20px 0;
     color: #555;
   }
 
-  &Criterion {
-    position: relative;
-    padding: 20px 30px 20px 0;
-    color: #fff;
-    cursor: pointer;
-
-    &.resultsSortUp:after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: 4px;
-
-      display: block;
-      width: 0;
-      height: 0;
-      border: 5px solid transparent;
-      border-top: 7px solid #f65261;
-      transform: translateY(-25%);
-    }
-
-    &.resultsSortDown:after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: 4px;
-
-      display: block;
-      width: 0;
-      height: 0;
-      border: 5px solid transparent;
-      border-bottom: 7px solid #f65261;
-      transform: translateY(-75%);
-    }
+  .resultsSortCriterion {
+    width: 184px;
   }
+
 }

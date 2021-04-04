@@ -8,17 +8,25 @@ import CM from './styles.pcss'
 
 const Nav = ({
     items,
-    sortByReleaseUp,
-    onChangeSort
+    selectedItem,
+    sortBy,
+    onSortChange,
+    onFilterClick,
+    isOpenedDropdown,
+    onIsOpenedDropdownChange
 }) => {
 
     return <div className={CM.nav}>
         <FilterList
             items={items}
+            selectedItem={selectedItem}
+            onFilterClick={onFilterClick}
         />
         <ResultsSort
-            sortByReleaseUp={sortByReleaseUp}
-            onChangeSort={onChangeSort}
+            sortBy={sortBy}
+            onSortChange={onSortChange}
+            isOpenedDropdown={isOpenedDropdown}
+            onIsOpenedDropdownChange={onIsOpenedDropdownChange}
         />
     </div>
 }
@@ -31,8 +39,12 @@ Nav.propTypes = {
             isSelected: PropTypes.bool
         })
     ).isRequired,
-    sortByReleaseUp: PropTypes.bool,
-    onChangeSort: PropTypes.func
+    selectedItem: PropTypes.string,
+    sortBy: PropTypes.string,
+    onSortChange: PropTypes.func,
+    onFilterClick: PropTypes.func,
+    isOpenedDropdown: PropTypes.bool,
+    onIsOpenedDropdownChange : PropTypes.func
 };
 
 export default Nav

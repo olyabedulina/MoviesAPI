@@ -12,28 +12,28 @@ const MultiSelect = ({
   onChange
 }) => {
 
-    function handleItemChange(checked, itemValue) {
+    function handleItemChange(checked, itemId) {
         const nextSelectedItems = checked ?
-            selectedItems.concat(itemValue) :
-            selectedItems.filter((value) => (value !== itemValue))
+            selectedItems.concat(itemId) :
+            selectedItems.filter((id) => (id !== itemId))
 
         onChange(nextSelectedItems)
     }
 
     const selectedItemTitles = selectedItems.map(
-        (selectedItemValue) => items.find(
-            ({ value }) => (value === selectedItemValue)
-        ).title
+        (selectedItemId) => items.find(
+            ({ id }) => (id === selectedItemId)
+        ).name
     )
 
   return <Dropdown placeholder={`${selectedItemTitles.length ? selectedItemTitles.join(', ') : placeholder}`}>
       {
-        items.map(({ value, title }) => <div key={value} className={CM.item}>
+        items.map(({ id, name }) => <div key={id} className={CM.item}>
           <Checkbox
-            checked={selectedItems.includes(value)}
-            data={value}
+            checked={selectedItems.includes(id)}
+            data={id}
             onChange={handleItemChange}
-          >{title}</Checkbox>
+          >{name}</Checkbox>
         </div>)
       }
   </Dropdown>

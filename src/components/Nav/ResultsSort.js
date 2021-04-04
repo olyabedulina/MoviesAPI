@@ -1,32 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+
+import DropdownControlled from '../DropdownControlled'
 
 import CM from './styles.pcss'
 
+const sortNameToDisplayNameMap = {
+    date: 'Release date',
+    title: 'Title'
+}
+
 const ResultsSort = ({
-    sortByReleaseUp,
-    onChangeSort
+    sortBy,
+    onSortChange,
+    isOpenedDropdown,
+    onIsOpenedDropdownChange
 }) => {
-
-    let sortClass = sortByReleaseUp ? 'Up' : 'Down';
-
-    function handleClick() {
-        onChangeSort(!sortByReleaseUp);
-    }
-
     return <div className={CM.resultsSort}>
         <h2 className={CM.resultsSortLabel}>Sort by</h2>
-        <div
-            className={`${CM.resultsSortCriterion} ${CM["resultsSort" + sortClass] || ''}`}
-            onClick={handleClick}>
-            Release date
+        <div className={CM.resultsSortCriterion}>
+            <DropdownControlled
+                theme='resultsSortCriterion'
+                placeholder={sortNameToDisplayNameMap[sortBy]}
+                isOpened={isOpenedDropdown}
+                onIsOpenedChange={onIsOpenedDropdownChange}
+            >
+                <div onClick={() => { onSortChange('date'); onIsOpenedDropdownChange() }}>Release date</div>
+                <div onClick={() => { onSortChange('title'); onIsOpenedDropdownChange() }}>Title</div>
+            </DropdownControlled>
         </div>
+
     </div>
 }
 
 ResultsSort.propTypes = {
-    sortByReleaseUp: PropTypes.bool,
-    onChangeSort: PropTypes.func
+    sortBy: PropTypes.string,
+    onSortChange: PropTypes.func,
+    isOpenedDropdown: PropTypes.bool,
+    onIsOpenedDropdownChange : PropTypes.func
 };
 
 export default ResultsSort

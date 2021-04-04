@@ -6,7 +6,9 @@ import FilterListItem from './FilterListItem'
 import CM from './styles.pcss'
 
 const FilterList = ({
-    items
+    items,
+    selectedItem,
+    onFilterClick
 }) => {
 
     return (items.length > 0) ? <ul className={CM.resultsFilter}>
@@ -15,6 +17,8 @@ const FilterList = ({
                     key={item.id}
                     data={item}
                     index={index}
+                    selectedItem={selectedItem}
+                    onFilterClick={onFilterClick}
                 />
             )
         }
@@ -30,9 +34,12 @@ FilterList.propTypes = {
         PropTypes.shape({
             id: PropTypes.string,
             name: PropTypes.string,
-            isSelected: PropTypes.bool
+            isSelected: PropTypes.bool,
+            isIncludedInFilter: PropTypes.bool
         })
-    ).isRequired
+    ).isRequired,
+    selectedItem: PropTypes.string,
+    onFilterClick: PropTypes.func
 };
 
 export default FilterList

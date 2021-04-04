@@ -39,7 +39,7 @@ Input.propTypes = {
     className: PropTypes.string,
     kind: PropTypes.string,
     type: PropTypes.string,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.node.isRequired,
     placeholder: PropTypes.string,
     children: PropTypes.node,
     onClick: PropTypes.func

@@ -5,18 +5,21 @@ import CM from './styles.pcss'
 
 const Popup = ({
     showPopup,
+    itemId,
     onPopupClose = Function.prototype,
     onMovieEdit = Function.prototype,
     onMovieDelete = Function.prototype
 }) => {
 
-    function handleEditClick() {
-        onMovieEdit();
+    function handleEditClick(event) {
+        event.preventDefault();
+        onMovieEdit(itemId);
         onPopupClose();
     }
 
-    function handleDeleteClick() {
-        onMovieDelete();
+    function handleDeleteClick(event) {
+        event.preventDefault();
+        onMovieDelete(itemId);
         onPopupClose();
     }
 

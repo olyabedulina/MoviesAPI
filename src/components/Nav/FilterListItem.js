@@ -5,13 +5,21 @@ import CM from './styles.pcss'
 
 const FilterListItem = ({
     data,
-    index
+    index,
+    selectedItem,
+    onFilterClick
 }) => {
 
-    return <li className={data.isSelected ? `${CM.resultsFilterItem} ${CM.selected}`: `${CM.resultsFilterItem}`}>
+    function handleClick(event) {
+        event.preventDefault();
+        onFilterClick(data.id);
+    }
+
+    return <li className={(data.id === selectedItem) ? `${CM.resultsFilterItem} ${CM.selected}`: `${CM.resultsFilterItem}`}>
         <a
             href="#"
             className={CM.resultsFilterLink}
+            onClick={handleClick}
         >{data.name}</a>
     </li>
 }
@@ -22,7 +30,9 @@ FilterListItem.propTypes = {
         name: PropTypes.string,
         isSelected: PropTypes.bool
     }).isRequired,
-    index: PropTypes.number
+    index: PropTypes.number,
+    selectedItem: PropTypes.string,
+    onFilterClick: PropTypes.func
 };
 
 export default FilterListItem
