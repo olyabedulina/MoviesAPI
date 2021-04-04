@@ -77,3 +77,46 @@
   text-transform: uppercase;
   color: #f65261;
 }
+
+.fieldError {
+  padding-top: 4px;
+  font-size: 14px;
+  color: #f65261;
+}
+
+.modalCongratulations {
+  &Title {
+    position: relative;
+    margin-top: -50px;
+    padding-top: 100px;
+    padding-bottom: 32px;
+    font-size: 40px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1px;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      margin-left: -20px;
+
+      content: '\2713';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 65px;
+      height: 65px;
+      border-radius: 40px;
+      background: #f65261;
+      color: #fff;
+    }
+  }
+
+  &Text {
+    padding: 0 70px;
+    font-size: 22px;
+    line-height: 26px;
+    text-align: center;
+  }
+}

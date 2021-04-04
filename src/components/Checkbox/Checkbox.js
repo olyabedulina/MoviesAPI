@@ -17,6 +17,7 @@ const Checkbox = ({
 
     return <label className={CM.checkboxLabel}>
             <input
+                name={name}
                 className={`${className} ${CM.checkbox}`}
                 type="checkbox"
                 checked={checked}

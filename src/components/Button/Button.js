@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import CM from './styles.pcss'
 
 const Button = ({
+    type = 'button',
     className = '',
     kind = 'main',
     children,
@@ -15,13 +16,14 @@ const Button = ({
 
     return <button
         className={`${className} ${CM.button} ${CM["kind-" + kind] || ''}`}
-        type="button"
+        type={type}
         onClick={handleClick}>
             {children}
         </button>
 }
 
 Button.propTypes = {
+    type: PropTypes.string,
     className: PropTypes.string,
     kind: PropTypes.string,
     children: PropTypes.node,

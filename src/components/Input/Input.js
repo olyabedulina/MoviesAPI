@@ -4,6 +4,8 @@ import React from 'react'
 import CM from './styles.pcss'
 
 const Input = ({
+    id = '',
+    name = '',
     className = '',
     kind = '',
     type = 'text',
@@ -13,16 +15,18 @@ const Input = ({
     onChange = Function.prototype
 }) => {
 
-    function handleInputChange(event) {
-        onChange(event)
-    }
+    // function handleInputChange(event) {
+    //     onChange(event)
+    // }
 
     return <input
+        id={id}
+        name={name}
         className={`${className} ${CM.input} ${CM["kind-" + kind] || ''}`}
         type={type}
         value={value}
         placeholder={placeholder}
-        onChange={handleInputChange}>
+        onChange={onChange}>
             {children}
         </input>
 }

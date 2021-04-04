@@ -19,9 +19,9 @@ const Modal = ({
         <div className={CM.modal}>
             <div className={CM.modalTitle}>{title}</div>
             <a href="#" className={CM.modalClose} onClick={handleCloseButtonClick}>&#10005;</a>
-            <ul className={CM.modalContainer}>
+            <div className={CM.modalContainer}>
                 {children}
-            </ul>
+            </div>
         </div>
     </>
 }
