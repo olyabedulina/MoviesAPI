@@ -21,19 +21,22 @@ const DeleteMovie = ({
     }
 
     return <>
-        <li className={CM.modalContainerItem}>
+        <div className={CM.modalContainerItem}>
+            <h3>Delete movie</h3>
+        </div>
+        <div className={CM.modalContainerItem}>
             <div className={CM.field}>
                 <span>Are you sure you want to delete this movie?</span>
             </div>
-        </li>
-        <li className={CM.modalFooter}>
+        </div>
+        <div className={CM.modalFooter}>
             <Button
                 kind='main'
                 onClick={handleConfirmClick}
                 className={CM.modalFooterButton}>
                 Confirm
             </Button>
-        </li>
+        </div>
     </>
 }
 

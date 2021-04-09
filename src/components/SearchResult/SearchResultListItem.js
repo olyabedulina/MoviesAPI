@@ -6,7 +6,11 @@ import Popup from '../Popup'
 import CM from './styles.pcss'
 
 import { getMovie } from '../../redux/actions'
-import { useDispatch } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import Modal from "../Modal";
+import EditMovie from "../Modal/EditMovie";
+import DeleteMovie from "../Modal/DeleteMovie";
+import { getFilterItems } from "../../redux/selectors";
 
 const SearchResultListItem = ({
     data,
@@ -16,8 +20,11 @@ const SearchResultListItem = ({
     onMovieImageClick = Function.prototype,
 }) => {
     const [displayPopup, setDisplayPopup] = useState(false);
+    const [displayEditMovie, setDisplayEditMovie] = useState(false);
+    const [displayDeleteMovie, setDisplayDeleteMovie] = useState(false);
 
     const dispatch = useDispatch()
+    const filterItems = useSelector(getFilterItems)
 
     function handleMovieOptionsClick() {
         setDisplayPopup(true);
@@ -30,6 +37,22 @@ const SearchResultListItem = ({
     function handleMovieImageClick() {
         onMovieImageClick(data.id)
         dispatch(getMovie(data.id))
+    }
+
+    function handleMovieEditClick() {
+        setDisplayEditMovie(true);
+    }
+
+    function handleMovieDeleteClick() {
+        setDisplayDeleteMovie(true);
+    }
+
+    function handleEditModalClose() {
+        setDisplayEditMovie(false);
+    }
+
+    function handleDeleteModalClose() {
+        setDisplayDeleteMovie(false);
     }
 
     return <li className={`${CM.moviesListItem} ${CM.movie}`}>
@@ -51,9 +74,25 @@ const SearchResultListItem = ({
             itemId={data.id}
             showPopup={displayPopup}
             onPopupClose={handlePopupClose}
-            onMovieEdit={onMovieEdit}
-            onMovieDelete={onMovieDelete}
+            onMovieEdit={handleMovieEditClick}
+            onMovieDelete={handleMovieDeleteClick}
             onMovieImageClick={onMovieImageClick}/>
+
+        { displayEditMovie ? <Modal onModalClose={handleEditModalClose}>
+            <EditMovie
+                genres={filterItems}
+                item={data}
+            />
+        </Modal> : ''
+        }
+
+        { displayDeleteMovie ? <Modal onModalClose={handleDeleteModalClose}>
+            <DeleteMovie
+                item={data}
+                onModalClose={handleDeleteModalClose}
+            />
+        </Modal> : ''
+        }
     </li>
 }
 

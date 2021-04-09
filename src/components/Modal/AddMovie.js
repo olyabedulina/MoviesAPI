@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { useDispatch } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 import Input from '../Input'
 import MultiSelect from '../MultiSelect'
@@ -13,17 +13,17 @@ import { addMovie } from '../../redux/actions'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
+import { getFilterItems } from '../../redux/selectors'
+
 const AddMovie = ({
-    children,
-    genres,
-    selectedGenresArray = [],
-    onModalClose = Function.prototype
+    children
 }) => {
 
-    const [selectedGenres, setSelectedGenres] = useState(selectedGenresArray)
+    const [selectedGenres, setSelectedGenres] = useState([])
     const [selectedGenresError, setSelectedGenresError] = useState(false)
     const [movieIsSaved, setMovieIsSaved] = useState(false)
 
+    const genres = useSelector(getFilterItems)
     const dispatch = useDispatch()
 
     function handleSelectedGenresChange(nextSelectedGenres) {
@@ -34,8 +34,8 @@ const AddMovie = ({
         }
     }
 
-    function handleCloseButtonClick() {
-        onModalClose();
+    function handleResetButtonClick() {
+        formik.resetForm()
     }
 
     function handleSubmitClick() {
@@ -56,7 +56,6 @@ const AddMovie = ({
         console.log("newMovie = ", newMovie)
 
         dispatch(addMovie(newMovie))
-        // onModalClose()
         setMovieIsSaved(true)
     }
 
@@ -92,6 +91,9 @@ const AddMovie = ({
     });
 
     return (!movieIsSaved) ? <form onSubmit={formik.handleSubmit}>
+                <div className={CM.modalContainerItem}>
+                    <h3>Add movie</h3>
+                </div>
                 <div className={CM.modalContainerItem}>
                     <div className={CM.field}>
                         <label className={CM.fieldLabel}>
@@ -212,7 +214,7 @@ const AddMovie = ({
                     <Button
                         kind='alt'
                         className={CM.modalFooterButton}
-                        onClick={handleCloseButtonClick}>
+                        onClick={handleResetButtonClick}>
                         Reset
                     </Button>
                     <Button
@@ -230,17 +232,7 @@ const AddMovie = ({
 }
 
 AddMovie.propTypes = {
-    children: PropTypes.node,
-    selectedGenresArray: PropTypes.array,
-    genres: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.string,
-            name: PropTypes.string,
-            isSelected: PropTypes.bool,
-            isIncludedInFilter: PropTypes.bool
-        })
-    ),
-    onModalClose: PropTypes.func
+    children: PropTypes.node
 };
 
 export default AddMovie

@@ -47,11 +47,11 @@ const validate = values => {
 const EditMovie = ({
     children,
     item,
-    genres,
-    onModalClose = Function.prototype
+    genres
 }) => {
 
-    const [selectedGenres, setSelectedGenres] = useState(genres.filter( ({ name }) => (item.genres.includes(name)) ).map(({ id }) => id) )
+    const selectedGenresInitial = genres.filter( ({ name }) => (item.genres.includes(name)) ).map(({ id }) => id);
+    const [selectedGenres, setSelectedGenres] = useState(selectedGenresInitial)
     const [selectedGenresError, setSelectedGenresError] = useState(false)
 
     const dispatch = useDispatch()
@@ -64,8 +64,9 @@ const EditMovie = ({
         }
     }
 
-    function handleCloseButtonClick() {
-        onModalClose();
+    function handleResetButtonClick() {
+        formik.resetForm()
+        setSelectedGenres(selectedGenresInitial)
     }
 
     function handleSubmitClick() {
@@ -85,16 +86,15 @@ const EditMovie = ({
         }
 
         dispatch(editMovie(updatedMovie))
-        onModalClose()
     }
 
     const formik = useFormik({
         initialValues: {
-            title: item.title,
-            selectDate: item.release_date,
-            movieURL: item.poster_path,
-            overview: item.overview,
-            runtime: item.runtime
+            title: item.title ? item.title : '',
+            selectDate: item.release_date ? item.release_date : '',
+            movieURL: item.poster_path ? item.poster_path : '',
+            overview: item.overview ? item.overview : '',
+            runtime: item.runtime ? item.runtime : ''
         },
         validate,
         onSubmit: values => {
@@ -104,6 +104,9 @@ const EditMovie = ({
 
     return <>
         <form onSubmit={formik.handleSubmit}>
+            <div className={CM.modalContainerItem}>
+                <h3>Edit movie</h3>
+            </div>
             <div className={CM.modalContainerItem}>
                 <div className={CM.field}>
                     <label className={CM.fieldLabel}>
@@ -232,7 +235,7 @@ const EditMovie = ({
                 <Button
                     kind='alt'
                     className={CM.modalFooterButton}
-                    onClick={handleCloseButtonClick}>
+                    onClick={handleResetButtonClick}>
                     Reset
                 </Button>
                 <Button
@@ -267,8 +270,7 @@ EditMovie.propTypes = {
             isSelected: PropTypes.bool,
             isIncludedInFilter: PropTypes.bool
         })
-    ),
-    onModalClose: PropTypes.func
+    )
 };
 
 export default EditMovie
