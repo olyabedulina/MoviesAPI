@@ -1,6 +1,6 @@
 export const filterItemsData = [
     {
-        id: '0',
+        id: '',
         name: 'All',
         isSelected: true,
         isIncludedInFilter: true
@@ -68,6 +68,48 @@ export const filterItemsData = [
     {
         id: '9',
         name: 'Music',
+        isSelected: false,
+        isIncludedInFilter: false
+    },
+    {
+        id: '12',
+        name: 'Romance',
+        isSelected: false,
+        isIncludedInFilter: false
+    },
+    {
+        id: '13',
+        name: 'Animation',
+        isSelected: false,
+        isIncludedInFilter: false
+    },
+    {
+        id: '14',
+        name: 'Family',
+        isSelected: false,
+        isIncludedInFilter: false
+    },
+    {
+        id: '15',
+        name: 'Science Fiction',
+        isSelected: false,
+        isIncludedInFilter: false
+    },
+    {
+        id: '16',
+        name: 'Mystery',
+        isSelected: false,
+        isIncludedInFilter: false
+    },
+    {
+        id: '17',
+        name: 'War',
+        isSelected: false,
+        isIncludedInFilter: false
+    },
+    {
+        id: '18',
+        name: 'History',
         isSelected: false,
         isIncludedInFilter: false
     }

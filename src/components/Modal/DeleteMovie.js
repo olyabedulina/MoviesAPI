@@ -3,12 +3,22 @@ import PropTypes from 'prop-types'
 
 import Button from '../Button'
 
+import { useDispatch } from 'react-redux'
+import { deleteMovie } from '../../redux/actions'
+
 import CM from './styles.pcss'
-import AddMovie from "./AddMovie";
 
 const DeleteMovie = ({
-    item
+    item,
+    onModalClose = Function.prototype
 }) => {
+
+    const dispatch = useDispatch()
+
+    function handleConfirmClick() {
+        dispatch(deleteMovie(item.id))
+        onModalClose()
+    }
 
     return <>
         <li className={CM.modalContainerItem}>
@@ -19,6 +29,7 @@ const DeleteMovie = ({
         <li className={CM.modalFooter}>
             <Button
                 kind='main'
+                onClick={handleConfirmClick}
                 className={CM.modalFooterButton}>
                 Confirm
             </Button>
@@ -28,24 +39,18 @@ const DeleteMovie = ({
 
 DeleteMovie.propTypes = {
     item: PropTypes.shape({
-        id: PropTypes.string,
-        src: PropTypes.string,
+        id: PropTypes.number.isRequired,
+        poster_path: PropTypes.string,
         title: PropTypes.string,
-        releaseDate: PropTypes.number,
-        genre: PropTypes.arrayOf(
-            PropTypes.shape({
-                id: PropTypes.string,
-                name: PropTypes.string,
-            })
-        ),
-        rating: PropTypes.string,
-        movieDuration: PropTypes.shape({
-            timing: PropTypes.number,
-            units: PropTypes.string
-        }),
-        url: PropTypes.string,
-        description: PropTypes.string
-    })
+        tagline: PropTypes.string,
+        release_date: PropTypes.string,
+        genres: PropTypes.arrayOf(PropTypes.string),
+        vote_average: PropTypes.number,
+        vote_count: PropTypes.number,
+        runtime: PropTypes.number,
+        overview: PropTypes.string
+    }),
+    onModalClose: PropTypes.func
 };
 
 export default DeleteMovie

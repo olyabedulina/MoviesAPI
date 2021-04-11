@@ -6,7 +6,6 @@ import SearchResultList from './SearchResultList'
 import CM from './styles.pcss'
 
 const SearchResult = ({
-    sortBy,
     items,
     onMovieEdit = Function.prototype,
     onMovieDelete = Function.prototype,
@@ -15,10 +14,9 @@ const SearchResult = ({
 
     return <div className={CM.searchResult}>
         <div className={CM.searchCount}>
-            <strong className={CM.searchCountHightlight}>{items.length}</strong> movies found
+            <strong className={CM.searchCountHightlight}>{(items) ? items.length : 0}</strong> movies found
         </div>
         <SearchResultList
-            sortBy={sortBy}
             items={items}
             onMovieEdit={onMovieEdit}
             onMovieDelete={onMovieDelete}
@@ -28,26 +26,18 @@ const SearchResult = ({
 }
 
 SearchResult.propTypes = {
-    sortBy: PropTypes.string,
     items: PropTypes.arrayOf(
         PropTypes.shape({
-            id: PropTypes.string,
-            src: PropTypes.string,
+            id: PropTypes.number.isRequired,
+            poster_path: PropTypes.string,
             title: PropTypes.string,
-            releaseDate: PropTypes.number,
-            genre: PropTypes.arrayOf(
-                PropTypes.shape({
-                    id: PropTypes.string,
-                    text: PropTypes.string,
-                })
-            ),
-            rating: PropTypes.string,
-            movieDuration: PropTypes.shape({
-                timing: PropTypes.number,
-                units: PropTypes.string
-            }),
-            url: PropTypes.string,
-            description: PropTypes.string
+            tagline: PropTypes.string,
+            release_date: PropTypes.string,
+            genres: PropTypes.arrayOf(PropTypes.string),
+            vote_average: PropTypes.number,
+            vote_count: PropTypes.number,
+            runtime: PropTypes.number,
+            overview: PropTypes.string
         })
     ).isRequired,
     onMovieEdit : PropTypes.func,

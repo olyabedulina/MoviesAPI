@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+// import PropTypes from 'prop-types'
 
 import CM from './styles.pcss'
 
@@ -10,39 +10,31 @@ const Input = ({
     value = '',
     placeholder = '',
     children,
-    onClick = Function.prototype
+    onChange = Function.prototype
 }) => {
-    const [inputValue, setinputValue] = useState(value)
 
     function handleInputChange(event) {
-        setinputValue(event.target.value)
-    }
-
-    function handleKeyDown(event) {
-        if (event.key === 'Enter') {
-            onClick();
-        }
+        onChange(event)
     }
 
     return <input
         className={`${className} ${CM.input} ${CM["kind-" + kind] || ''}`}
         type={type}
-        value={inputValue}
+        value={value}
         placeholder={placeholder}
-        onChange={handleInputChange}
-        onKeyDown={handleKeyDown}>
+        onChange={handleInputChange}>
             {children}
         </input>
 }
 
-Input.propTypes = {
-    className: PropTypes.string,
-    kind: PropTypes.string,
-    type: PropTypes.string,
-    value: PropTypes.node.isRequired,
-    placeholder: PropTypes.string,
-    children: PropTypes.node,
-    onClick: PropTypes.func
-};
+// Input.propTypes = {
+//     className: PropTypes.string,
+//     kind: PropTypes.string,
+//     type: PropTypes.string,
+//     value: PropTypes.node.isRequired,
+//     placeholder: PropTypes.string,
+//     children: PropTypes.node,
+//     onClick: PropTypes.func
+// };
 
 export default Input

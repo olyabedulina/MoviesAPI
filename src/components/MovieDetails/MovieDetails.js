@@ -24,20 +24,21 @@ const MovieDetails = ({
             ></div>
         </div>
         <div className={CM.movieDetailsContainer}>
+            {/*{ console.log("movie = ", movie) }*/}
             <div className={CM.movieImage}>
                 <img
                     className={CM.movieImageImg}
-                    src={movie.src}
+                    src={movie.poster_path}
                     alt={movie.title}
                 />
             </div>
             <div className={CM.movieData}>
                 <div className={CM.movieName}>{movie.title}</div>
-                <div className={CM.movieRating}>{movie.rating}</div>
-                <div className={CM.movieGenre}>{movie.genre.map(({ name }) => name).join(', ')}</div>
-                <div className={CM.movieReleaseYear}>{movie.releaseDate}</div>
-                <div className={CM.movieDuration}>{movie.movieDuration.timing} {movie.movieDuration.units}</div>
-                <div className={CM.movieDescription}>{movie.description}</div>
+                { movie.vote_average ? <div className={CM.movieRating}>{movie.vote_average}</div> : '' }
+                <div className={CM.movieGenre}>{movie.genres.map((name) => name).join(', ')}</div>
+                <div className={CM.movieReleaseYear}>{movie.release_date}</div>
+                { movie.runtime ? <div className={CM.movieDuration}>{`${movie.runtime} min`}</div> : '' }
+                <div className={CM.movieDescription}>{movie.overview}</div>
             </div>
         </div>
     </div>
@@ -45,24 +46,17 @@ const MovieDetails = ({
 
 MovieDetails.propTypes = {
     movie: PropTypes.shape({
-    id: PropTypes.string,
-    src: PropTypes.string,
-    title: PropTypes.string,
-    releaseDate: PropTypes.number,
-    genre: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.string,
-            name: PropTypes.string,
-        })
-    ),
-    rating: PropTypes.string,
-    movieDuration: PropTypes.shape({
-        timing: PropTypes.number,
-        units: PropTypes.string
-    }),
-    url: PropTypes.string,
-    description: PropTypes.string
-}).isRequired,
+        id: PropTypes.number.isRequired,
+        poster_path: PropTypes.string,
+        title: PropTypes.string,
+        tagline: PropTypes.string,
+        release_date: PropTypes.string,
+        genres: PropTypes.arrayOf(PropTypes.string),
+        vote_average: PropTypes.number,
+        vote_count: PropTypes.number,
+        runtime: PropTypes.number,
+        overview: PropTypes.string
+    }).isRequired,
     onMagnifierClick: PropTypes.func
 };
 

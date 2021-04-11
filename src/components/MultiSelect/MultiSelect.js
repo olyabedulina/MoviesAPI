@@ -28,7 +28,7 @@ const MultiSelect = ({
 
   return <Dropdown placeholder={`${selectedItemTitles.length ? selectedItemTitles.join(', ') : placeholder}`}>
       {
-        items.map(({ id, name }) => <div key={id} className={CM.item}>
+        items.filter(({ id }) => (id !== '')).map(({ id, name }) => <div key={id} className={CM.item}>
           <Checkbox
             checked={selectedItems.includes(id)}
             data={id}
