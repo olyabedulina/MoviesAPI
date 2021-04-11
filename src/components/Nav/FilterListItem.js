@@ -5,7 +5,7 @@ import CM from './styles.pcss'
 import { useDispatch } from 'react-redux'
 import { sortAndFilterMoviesBy } from '../../redux/actions'
 
-import { getFilterItems } from '../../redux/selectors'
+import {getFilterItems, getSearchQuery} from '../../redux/selectors'
 import { useSelector } from "react-redux";
 
 const FilterListItem = ({
@@ -18,13 +18,14 @@ const FilterListItem = ({
 }) => {
     const dispatch = useDispatch()
     const filterItems = useSelector(getFilterItems)
+    const searchQuery = useSelector(getSearchQuery)
 
     function handleClick(event) {
         event.preventDefault();
 
         const filters = filterItems.find(({id}) => (id == data.id)).name;
         // dispatch(filterMoviesBy((filters.includes('All')) ? '' : filters, data.id));
-        dispatch(sortAndFilterMoviesBy(sortBy, sortOrder, (filters.includes('All')) ? '' : filters, data.id));
+        dispatch(sortAndFilterMoviesBy(sortBy, sortOrder, (filters.includes('All')) ? '' : filters, data.id, searchQuery, 'title'));
     }
 
     return <li className={(data.id === selectedItem) ? `${CM.resultsFilterItem} ${CM.selected}`: `${CM.resultsFilterItem}`}>

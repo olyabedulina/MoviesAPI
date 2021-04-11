@@ -1,23 +1,20 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 import Popup from '../Popup'
 
 import CM from './styles.pcss'
 
 import { getMovie } from '../../redux/actions'
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Modal from "../Modal";
 import EditMovie from "../Modal/EditMovie";
 import DeleteMovie from "../Modal/DeleteMovie";
 import { getFilterItems } from "../../redux/selectors";
 
 const SearchResultListItem = ({
-    data,
-    index,
-    onMovieEdit,
-    onMovieDelete,
-    onMovieImageClick = Function.prototype,
+    data
 }) => {
     const [displayPopup, setDisplayPopup] = useState(false);
     const [displayEditMovie, setDisplayEditMovie] = useState(false);
@@ -35,7 +32,7 @@ const SearchResultListItem = ({
     }
 
     function handleMovieImageClick() {
-        onMovieImageClick(data.id)
+        // onMovieImageClick(data.id)
         dispatch(getMovie(data.id))
     }
 
@@ -57,12 +54,14 @@ const SearchResultListItem = ({
 
     return <li className={`${CM.moviesListItem} ${CM.movie}`}>
         <div className={CM.movieImage}>
-            <img
-                className={CM.movieImageImg}
-                src={data.poster_path}
-                alt={data.title}
-                onClick={handleMovieImageClick}
-            />
+            <Link to={`/film/${data.id}`} className={CM.movieImageLink}>
+                <img
+                    className={CM.movieImageImg}
+                    src={data.poster_path}
+                    alt={data.title}
+                    onClick={handleMovieImageClick}
+                />
+            </Link>
         </div>
         <div className={CM.movieFooter}>
             <div className={CM.movieTitle}>{data.title}</div>
@@ -76,7 +75,7 @@ const SearchResultListItem = ({
             onPopupClose={handlePopupClose}
             onMovieEdit={handleMovieEditClick}
             onMovieDelete={handleMovieDeleteClick}
-            onMovieImageClick={onMovieImageClick}/>
+            onMovieImageClick={handleMovieImageClick}/>
 
         { displayEditMovie ? <Modal onModalClose={handleEditModalClose}>
             <EditMovie
@@ -108,11 +107,7 @@ SearchResultListItem.propTypes = {
         vote_count: PropTypes.number,
         runtime: PropTypes.number,
         overview: PropTypes.string
-    }).isRequired,
-    index: PropTypes.number,
-    onMovieEdit : PropTypes.func,
-    onMovieDelete : PropTypes.func,
-    onMovieImageClick: PropTypes.func
+    }).isRequired
 };
 
 export default SearchResultListItem

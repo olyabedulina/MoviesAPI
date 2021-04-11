@@ -5,13 +5,17 @@ const baseUrl = 'http://localhost:4000'
 export function loadMovies({
     filters = '',
     sortBy = '',
-    sortOrder = ''
+    sortOrder = '',
+    search = '',
+    searchBy = 'title'
 }) {
     return axios.get(`${baseUrl}/movies`, {
         params: {
             filter: filters,
             sortBy: sortBy,
-            sortOrder: sortOrder
+            sortOrder: sortOrder,
+            search: search,
+            searchBy: searchBy
         }
         }).then(response => {
         return response.data.data

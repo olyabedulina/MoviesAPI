@@ -6,27 +6,37 @@ import {
     deleteMovie as deleteMovieService
 } from '../../services'
 
-export function loadMovies() {
+export function loadMovies(search) {
     return (dispatch) => {
         dispatch({
             type: 'MOVIES__LOAD__INIT'
         })
 
-        loadMoviesService({sortBy: 'release_date', sortOrder: 'desc', filters: ''}).then((moviesData) => {
+        loadMoviesService({
+            sortBy: 'release_date',
+            sortOrder: 'desc',
+            filters: '',
+            search: search,
+            searchBy: 'title'
+        }).then((moviesData) => {
             dispatch({
                 type: 'MOVIES__LOAD__DONE',
-                payload: moviesData
+                payload:
+                    {
+                        moviesData: moviesData,
+                        search: search
+                    }
             })
         })
     }
 }
 
-export function initApp() {
+export function initApp(searchQuery) {
     return (dispatch) => {
         dispatch({
             type: 'APP__INIT'
         })
-        dispatch(loadMovies())
+        dispatch(loadMovies(searchQuery))
     }
 }
 
@@ -87,7 +97,10 @@ export function getMovie(movieId) {
             type: 'MOVIE__GET__INIT'
         })
 
+        console.log("movieId = ", movieId)
+
         getMovieService(movieId).then((movieData) => {
+            console.log("movieData = ", movieData)
             dispatch({
                 type: 'MOVIE__GET__DONE',
                 payload: movieData
@@ -136,13 +149,13 @@ export function filterMoviesBy(filters, movieFilterID) {
     }
 }
 
-export function sortAndFilterMoviesBy(sortBy, sortOrder, filters, movieFilterID) {
+export function sortAndFilterMoviesBy(sortBy, sortOrder, filters, movieFilterID, searchQuery) {
     return (dispatch) => {
         dispatch({
             type: 'MOVIES__SORT__AND__FILTER__INIT'
         })
 
-        loadMoviesService({sortBy: sortBy, sortOrder: sortOrder, filters: filters}).then((moviesData) => {
+        loadMoviesService({sortBy: sortBy, sortOrder: sortOrder, filters: filters, search: searchQuery, searchBy: 'title'}).then((moviesData) => {
             dispatch({
                 type: 'MOVIES__SORT__AND__FILTER__DONE',
                 payload:
@@ -154,6 +167,14 @@ export function sortAndFilterMoviesBy(sortBy, sortOrder, filters, movieFilterID)
                         filters: filters
                     }
             })
+        })
+    }
+}
+
+export function resetApp() {
+    return (dispatch) => {
+        dispatch({
+            type: 'RESET__APP'
         })
     }
 }

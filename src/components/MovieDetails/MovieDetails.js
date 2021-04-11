@@ -1,30 +1,45 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import CM from './styles.pcss'
 import headerLogo from "../images/logo.png";
 
+import { getMovie } from "../../redux/actions";
+import { getCurrentMovie } from '../../redux/selectors'
+
 const MovieDetails = ({
-    movie,
-    onMagnifierClick = Function.prototype
+    movieId = 424785
 }) => {
 
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        console.log("id = ", movieId)
+        dispatch(getMovie(movieId))
+    }, [])
+
+    const movie = useSelector(getCurrentMovie)
+
     function handleMagnifierClick() {
-        onMagnifierClick()
+        // onMagnifierClick()
+        // navigate to home page
     }
 
-    return <div className={CM.movieDetails}>
+    return movie ? <div className={CM.movieDetails}>
         <div className={CM.movieDetailsHeader}>
             <a href="#" className={CM.movieDetailsLogo}>
                 <img className={CM.logoImage} src={headerLogo} alt="Netflix roulette"/>
             </a>
-            <div
-                className={CM.movieDetailsMagnifier}
-                onClick={handleMagnifierClick}
-            ></div>
+            <Link to="/">
+                <div
+                    className={CM.movieDetailsMagnifier}
+                    onClick={handleMagnifierClick}
+                ></div>
+            </Link>
         </div>
         <div className={CM.movieDetailsContainer}>
-            {/*{ console.log("movie = ", movie) }*/}
+            { console.log("movie = ", movie) }
             <div className={CM.movieImage}>
                 <img
                     className={CM.movieImageImg}
@@ -41,23 +56,7 @@ const MovieDetails = ({
                 <div className={CM.movieDescription}>{movie.overview}</div>
             </div>
         </div>
-    </div>
+    </div> : ''
 }
-
-MovieDetails.propTypes = {
-    movie: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        poster_path: PropTypes.string,
-        title: PropTypes.string,
-        tagline: PropTypes.string,
-        release_date: PropTypes.string,
-        genres: PropTypes.arrayOf(PropTypes.string),
-        vote_average: PropTypes.number,
-        vote_count: PropTypes.number,
-        runtime: PropTypes.number,
-        overview: PropTypes.string
-    }).isRequired,
-    onMagnifierClick: PropTypes.func
-};
 
 export default MovieDetails

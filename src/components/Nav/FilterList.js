@@ -26,7 +26,7 @@ const FilterList = ({
                 />
             )
         }
-    </ul> : <div>No filter items</div>
+    </ul> : <div className={CM.noFilterItems}>No filter items</div>
 
     // /* Generate error for ErrorBoundary */
     // throw Error("Filter List Test Error!");
