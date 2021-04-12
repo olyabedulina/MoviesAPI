@@ -53,12 +53,13 @@ const SearchResultListItem = ({
     }
 
     return <li className={`${CM.moviesListItem} ${CM.movie}`}>
-        <div className={CM.movieImage}>
+        <div className={CM.movieImage} title={data.title}>
             <Link to={`/film/${data.id}`} className={CM.movieImageLink}>
                 <img
                     className={CM.movieImageImg}
                     src={data.poster_path}
-                    alt={data.title}
+                    title={data.title}
+                    alt=''
                     onClick={handleMovieImageClick}
                 />
             </Link>

@@ -90,15 +90,7 @@ function rootReducer(state = initialState, action) {
         case 'RESET__APP':
             return {
                 ...state,
-                movieList: [],
-                filterItemsList: filterItemsData,
-                currentMovie: null,
-                sortBy: 'release_date',
-                sortOrder: 'desc',
-                movieFilterID: null,
-                filters: '',
-                search: '',
-                searchBy: 'title'
+                ...initialState
             }
         default:
             return state

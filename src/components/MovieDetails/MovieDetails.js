@@ -28,23 +28,24 @@ const MovieDetails = ({
 
     return movie ? <div className={CM.movieDetails}>
         <div className={CM.movieDetailsHeader}>
-            <a href="#" className={CM.movieDetailsLogo}>
+            <Link to="/" className={CM.movieDetailsLogo}>
                 <img className={CM.logoImage} src={headerLogo} alt="Netflix roulette"/>
-            </a>
+            </Link>
             <Link to="/">
                 <div
                     className={CM.movieDetailsMagnifier}
                     onClick={handleMagnifierClick}
-                ></div>
+                />
             </Link>
         </div>
         <div className={CM.movieDetailsContainer}>
             { console.log("movie = ", movie) }
-            <div className={CM.movieImage}>
+            <div className={CM.movieImage} title={movie.title}>
                 <img
                     className={CM.movieImageImg}
                     src={movie.poster_path}
-                    alt={movie.title}
+                    alt=''
+                    title={movie.title}
                 />
             </div>
             <div className={CM.movieData}>
