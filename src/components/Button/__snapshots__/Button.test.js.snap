@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button component test: Testing "+ Add Movie" Button component 1`] = `
+<button
+  className="buttonAddMovie button kind-aux"
+  onClick={[Function]}
+  type="button"
+>
+  + Add Movie
+</button>
+`;
+
+exports[`Button component test: Testing "Go Back To Home" Button component 1`] = `
+<button
+  className="pageNotFoundButton button kind-alt"
+  onClick={[Function]}
+  type="button"
+>
+  Go Back To Home
+</button>
+`;
+
+exports[`Button component test: Testing "Reset" Button component 1`] = `
+<button
+  className="modalFooterButton button kind-alt"
+  onClick={[Function]}
+  type="button"
+>
+  Reset
+</button>
+`;
+
+exports[`Button component test: Testing "Search" Button component 1`] = `
+<button
+  className="formButton button kind-main"
+  onClick={[Function]}
+  type="submit"
+>
+  Search
+</button>
+`;
+
+exports[`Button component test: Testing "Submit" Button component 1`] = `
+<button
+  className="modalFooterButton button kind-main"
+  onClick={[Function]}
+  type="submit"
+>
+  Submit
+</button>
+`;
