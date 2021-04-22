@@ -12,7 +12,7 @@ export function loadMovies(search) {
             type: 'MOVIES__LOAD__INIT'
         })
 
-        loadMoviesService({
+        return loadMoviesService({
             sortBy: 'release_date',
             sortOrder: 'desc',
             filters: '',
@@ -172,9 +172,7 @@ export function sortAndFilterMoviesBy(sortBy, sortOrder, filters, movieFilterID,
 }
 
 export function resetApp() {
-    return (dispatch) => {
-        dispatch({
-            type: 'RESET__APP'
-        })
+    return {
+        type: 'RESET__APP'
     }
 }

@@ -338,5 +338,4 @@ describe('Redux :: Reducer tests:', () => {
 
         expect(rootReducer(initialState, action)).toEqual(expectedState)
     })
-
 });
