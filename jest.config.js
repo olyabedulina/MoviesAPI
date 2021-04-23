@@ -2,7 +2,7 @@ const { defaults } = require('jest-config');
 
 module.exports = {
     verbose: true,
-    testEnvironment: 'node',
+    testEnvironment: 'jsdom',
     testRegex: "((\\.|/*.)(test))\\.js?$",
     moduleFileExtensions: [
         ...defaults.moduleFileExtensions, 'css', 'pcss', 'ts', 'tsx', 'jsx', 'json', "js", "node"
