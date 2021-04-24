@@ -6,13 +6,13 @@ import {
     deleteMovie as deleteMovieService
 } from '../../services'
 
-export function loadMovies(search) {
+export function loadMovies({ search, __loadMoviesService = loadMoviesService }) {
     return (dispatch) => {
         dispatch({
             type: 'MOVIES__LOAD__INIT'
         })
 
-        return loadMoviesService({
+        return __loadMoviesService({
             sortBy: 'release_date',
             sortOrder: 'desc',
             filters: '',
@@ -31,27 +31,22 @@ export function loadMovies(search) {
     }
 }
 
-export function initApp(searchQuery) {
+export function initApp(search) {
     return (dispatch) => {
         dispatch({
             type: 'APP__INIT'
         })
-        dispatch(loadMovies(searchQuery))
+        dispatch(loadMovies({ search }))
     }
 }
 
-export function addMovie(movieInfo) {
+export function addMovie({ movieInfo, __addMovieService = addMovieService }) {
     return (dispatch) => {
-        dispatch({
-            type: 'MOVIE__ADD'
-        })
-
         dispatch({
             type: 'MOVIE__ADD__INIT'
         })
 
-        addMovieService(movieInfo).then((moviesData) => {
-            // console.log(123, moviesData)
+        return __addMovieService(movieInfo).then((moviesData) => {
             dispatch({
                 type: 'MOVIE__ADD__DONE',
                 payload: moviesData
@@ -60,14 +55,13 @@ export function addMovie(movieInfo) {
     }
 }
 
-export function editMovie(movieInfo) {
+export function editMovie({ movieInfo, __editMovieService = editMovieService }) {
     return (dispatch) => {
         dispatch({
             type: 'MOVIE__EDIT__INIT'
         })
 
-        editMovieService(movieInfo).then((moviesData) => {
-            // console.log(123, moviesData)
+        return __editMovieService(movieInfo).then((moviesData) => {
             dispatch({
                 type: 'MOVIE__EDIT__DONE',
                 payload: moviesData
@@ -76,13 +70,13 @@ export function editMovie(movieInfo) {
     }
 }
 
-export function deleteMovie(movieId) {
+export function deleteMovie({ movieId, __deleteMovieService = deleteMovieService }) {
     return (dispatch) => {
         dispatch({
             type: 'MOVIE__DELETE__INIT'
         })
 
-        deleteMovieService(movieId).then(() => {
+        return __deleteMovieService(movieId).then(() => {
             dispatch({
                 type: 'MOVIE__DELETE__DONE',
                 payload: movieId
@@ -91,16 +85,13 @@ export function deleteMovie(movieId) {
     }
 }
 
-export function getMovie(movieId) {
+export function getMovie({ movieId, __getMovieService = getMovieService }) {
     return (dispatch) => {
         dispatch({
             type: 'MOVIE__GET__INIT'
         })
 
-        console.log("movieId = ", movieId)
-
-        getMovieService(movieId).then((movieData) => {
-            console.log("movieData = ", movieData)
+        return __getMovieService(movieId).then((movieData) => {
             dispatch({
                 type: 'MOVIE__GET__DONE',
                 payload: movieData

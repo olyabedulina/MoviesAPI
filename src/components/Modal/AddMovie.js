@@ -53,9 +53,7 @@ const AddMovie = ({
             genres: genres.filter(({ id }) => (selectedGenres.includes(id))).map(({ name }) => name)
         }
 
-        console.log("newMovie = ", newMovie)
-
-        dispatch(addMovie(newMovie))
+        dispatch(addMovie({ movieInfo: newMovie }))
         setMovieIsSaved(true)
     }
 
