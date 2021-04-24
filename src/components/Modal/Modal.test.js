@@ -1,7 +1,5 @@
 import React from 'react'
-import 'regenerator-runtime/runtime'
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
 
 import Modal from "./Modal";
 
@@ -18,4 +16,5 @@ describe('Components :: Modal unit tests:', () => {
         expect(closeButton).toBeTruthy()
         expect(child).toBeTruthy()
     });
+
 });
