@@ -1,4 +1,5 @@
 import React from 'react'
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types'
 
 import CM from './styles.pcss'
@@ -14,16 +15,16 @@ const Modal = ({
         onModalClose();
     }
 
-    return <>
+    return createPortal(<>
         <div className={CM.modalOverlay}></div>
         <div className={CM.modal}>
             <div className={CM.modalTitle}>{title}</div>
             <a href="#" className={CM.modalClose} onClick={handleCloseButtonClick}>&#10005;</a>
-            <ul className={CM.modalContainer}>
+            <div className={CM.modalContainer}>
                 {children}
-            </ul>
+            </div>
         </div>
-    </>
+    </>, document.getElementById("app"))
 }
 
 Modal.propTypes = {
