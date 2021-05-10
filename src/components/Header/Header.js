@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 import Search from './Search'
 import Button from '../Button'
@@ -22,9 +23,9 @@ const Header = () => {
     }
 
     return <div className={CM.header}>
-        <a href="#" className={CM.logo}>
+        <Link to="/" className={CM.logo}>
             <img className={CM.logoImage} src={headerLogo} alt="Netflix roulette"/>
-        </a>
+        </Link>
         <Button
             kind="aux"
             className={CM.buttonAddMovie}

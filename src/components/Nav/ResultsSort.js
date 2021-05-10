@@ -8,6 +8,9 @@ import CM from './styles.pcss'
 // import { sortMoviesBy } from '../../redux/actions'
 import { sortAndFilterMoviesBy } from '../../redux/actions'
 
+import { useSelector } from "react-redux";
+import {getSearchQuery} from "../../redux/selectors";
+
 const sortNameToDisplayNameMap = {
     release_date: 'Release date',
     title: 'Title',
@@ -23,6 +26,7 @@ const ResultsSort = ({
     onIsOpenedDropdownChange
 }) => {
     const dispatch = useDispatch()
+    const searchQuery = useSelector(getSearchQuery)
 
     return <div className={CM.resultsSort}>
         <h2 className={CM.resultsSortLabel}>Sort by</h2>
@@ -34,15 +38,15 @@ const ResultsSort = ({
                 onIsOpenedChange={onIsOpenedDropdownChange}
             >
                 <div onClick={() => {
-                    dispatch(sortAndFilterMoviesBy('release_date', sortOrder, filters, selectedItem));
+                    dispatch(sortAndFilterMoviesBy('release_date', sortOrder, filters, selectedItem, searchQuery, 'title'));
                     onIsOpenedDropdownChange();
                 }}>Release date</div>
                 <div onClick={() => {
-                    dispatch(sortAndFilterMoviesBy('title', sortOrder, filters, selectedItem));
+                    dispatch(sortAndFilterMoviesBy('title', sortOrder, filters, selectedItem, searchQuery, 'title'));
                     onIsOpenedDropdownChange();
                 }}>Title</div>
                 <div onClick={() => {
-                    dispatch(sortAndFilterMoviesBy('vote_average', sortOrder, filters, selectedItem));
+                    dispatch(sortAndFilterMoviesBy('vote_average', sortOrder, filters, selectedItem, searchQuery, 'title'));
                     onIsOpenedDropdownChange();
                 }}>Rating</div>
             </DropdownControlled>

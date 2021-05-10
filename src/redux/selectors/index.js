@@ -14,7 +14,7 @@ export function getSortBy(state) {
     return state.sortBy
 }
 
-export function  getSortOrder(state) {
+export function getSortOrder(state) {
     return state.sortOrder
 }
 
@@ -24,4 +24,8 @@ export function getFilters(state) {
 
 export function getSelectedItem(state) {
     return state.movieFilterID
+}
+
+export function getSearchQuery(state) {
+    return state.search
 }

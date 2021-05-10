@@ -6,10 +6,7 @@ import SearchResultListItem from './SearchResultListItem'
 import CM from './styles.pcss'
 
 const SearchResultList = ({
-    items,
-    onMovieEdit = Function.prototype,
-    onMovieDelete = Function.prototype,
-    onMovieImageClick = Function.prototype
+    items
 }) => {
 
   return (items.length > 0) ? <ul className={CM.moviesList}>
@@ -18,10 +15,6 @@ const SearchResultList = ({
           items.map((item, index) => <SearchResultListItem
               key={item.id}
               data={item}
-              index={index}
-              onMovieEdit={onMovieEdit}
-              onMovieDelete={onMovieDelete}
-              onMovieImageClick={onMovieImageClick}
               />
           )
       }
@@ -42,10 +35,7 @@ SearchResultList.propTypes = {
             runtime: PropTypes.number,
             overview: PropTypes.string
         })
-    ).isRequired,
-    onMovieEdit : PropTypes.func,
-    onMovieDelete : PropTypes.func,
-    onMovieImageClick: PropTypes.func
+    ).isRequired
 };
 
 export default SearchResultList

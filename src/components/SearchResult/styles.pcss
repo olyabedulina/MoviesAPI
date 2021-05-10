@@ -33,11 +33,17 @@
 
   &Image {
     cursor: pointer;
+    background: url(../images/no-image-available.png) no-repeat center 60px rgba(255, 255, 255, 0);
 
-    > img {
-      width: 100%;
-      max-width: 100%;
-      min-height: 483px;
+    &Link {
+      display: block;
+
+      > img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        min-height: 483px;
+      }
     }
   }
 
@@ -91,6 +97,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  padding: 170px 0 260px;
   font-size: 40px;
-  padding: 70px 0 160px;
+  line-height: 42px;
+  text-transform: capitalize;
+  letter-spacing: 2px;
 }
