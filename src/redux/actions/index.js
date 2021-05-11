@@ -46,7 +46,7 @@ export function addMovie({ movieInfo, __addMovieService = addMovieService }) {
             type: 'MOVIE__ADD__INIT'
         })
 
-        return __addMovieService(movieInfo).then((moviesData) => {
+        return __addMovieService({ movieInfo: movieInfo }).then((moviesData) => {
             dispatch({
                 type: 'MOVIE__ADD__DONE',
                 payload: moviesData
@@ -61,7 +61,7 @@ export function editMovie({ movieInfo, __editMovieService = editMovieService }) 
             type: 'MOVIE__EDIT__INIT'
         })
 
-        return __editMovieService(movieInfo).then((moviesData) => {
+        return __editMovieService({ movieInfo: movieInfo }).then((moviesData) => {
             dispatch({
                 type: 'MOVIE__EDIT__DONE',
                 payload: moviesData
@@ -76,7 +76,7 @@ export function deleteMovie({ movieId, __deleteMovieService = deleteMovieService
             type: 'MOVIE__DELETE__INIT'
         })
 
-        return __deleteMovieService(movieId).then(() => {
+        return __deleteMovieService({ movieId: movieId }).then(() => {
             dispatch({
                 type: 'MOVIE__DELETE__DONE',
                 payload: movieId
@@ -91,7 +91,7 @@ export function getMovie({ movieId, __getMovieService = getMovieService }) {
             type: 'MOVIE__GET__INIT'
         })
 
-        return __getMovieService(movieId).then((movieData) => {
+        return __getMovieService({ movieId: movieId }).then((movieData) => {
             dispatch({
                 type: 'MOVIE__GET__DONE',
                 payload: movieData

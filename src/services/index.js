@@ -7,45 +7,72 @@ export function loadMovies({
     sortBy = '',
     sortOrder = '',
     search = '',
-    searchBy = 'title'
+    searchBy = 'title',
+    __loadMovies = null
 }) {
-    return axios.get(`${baseUrl}/movies`, {
-        params: {
-            filter: filters,
-            sortBy: sortBy,
-            sortOrder: sortOrder,
-            search: search,
-            searchBy: searchBy
-        }
+
+    if (__loadMovies) {
+        return __loadMovies()
+    }
+    else {
+        return axios.get(`${baseUrl}/movies`, {
+            params: {
+                filter: filters,
+                sortBy: sortBy,
+                sortOrder: sortOrder,
+                search: search,
+                searchBy: searchBy
+            }
         }).then(response => {
-        return response.data.data
-    })
+            return response.data.data
+        })
+    }
 }
 
-export function addMovie(movieInfo) {
+export function addMovie({ movieInfo,  __addMovie = null}) {
     const headers = {
         'Content-Type': 'application/json'
     }
 
-    return axios.post(`${baseUrl}/movies`, movieInfo, { headers })
-        .then(response => response.data)
+    if (__addMovie) {
+        return __addMovie()
+    }
+    else {
+        return axios.post(`${baseUrl}/movies`, movieInfo, { headers })
+            .then(response => response.data)
+    }
 }
 
-export function editMovie(movieInfo) {
+export function editMovie({ movieInfo,  __editMovie = null}) {
     const headers = {
         'Content-Type': 'application/json'
     }
 
-    return axios.put(`${baseUrl}/movies`, movieInfo, { headers })
-        .then(response => response.data)
+    if (__editMovie) {
+        return __editMovie()
+    }
+    else {
+        return axios.put(`${baseUrl}/movies`, movieInfo, { headers })
+            .then(response => response.data)
+    }
 }
 
-export function deleteMovie(movieId) {
-    return axios.delete(`${baseUrl}/movies/${movieId}`)
-        .then(response => response.data)
+export function deleteMovie({ movieId, __deleteMovie = null }) {
+    if (__deleteMovie) {
+        return __deleteMovie()
+    }
+    else {
+        return axios.delete(`${baseUrl}/movies/${movieId}`)
+            .then(response => response.data)
+    }
 }
 
-export function getMovie(movieId) {
-    return axios.get(`${baseUrl}/movies/${movieId}`)
-        .then(response => response.data)
+export function getMovie({ movieId, __getMovie = null }) {
+    if (__getMovie) {
+        return __getMovie()
+    }
+    else {
+        return axios.get(`${baseUrl}/movies/${movieId}`)
+            .then(response => response.data)
+    }
 }

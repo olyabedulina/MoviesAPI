@@ -109,13 +109,13 @@ describe('"addMovie" action creator', () => {
         }
         const addMovieServiceMock = sinon.spy(() => Promise.resolve())
 
-        const thunkAction = addMovie({ movieInfo, __addMovieService: addMovieServiceMock })
+        const thunkAction = addMovie({ movieInfo: movieInfo, __addMovieService: addMovieServiceMock })
         thunkAction(Function.prototype)
 
         const addMovieServiceMockCalls = addMovieServiceMock.getCalls()
 
         expect(addMovieServiceMockCalls.length).toEqual(1)
-        expect(addMovieServiceMockCalls[0].args[0]).toEqual(movieInfo)
+        expect(addMovieServiceMockCalls[0].args[0]).toEqual({ movieInfo: movieInfo })
     })
 
     it('dispatches "MOVIE__ADD__DONE" action after successfull service function call', (done) => {
@@ -164,13 +164,13 @@ describe('"deleteMovie" action creator', () => {
         const movieId = 'foobar'
         const deleteMovieServiceMock = sinon.spy(() => Promise.resolve())
 
-        const thunkAction = deleteMovie({ movieId, __deleteMovieService: deleteMovieServiceMock })
+        const thunkAction = deleteMovie({ movieId: movieId, __deleteMovieService: deleteMovieServiceMock })
         thunkAction(Function.prototype)
 
         const deleteMovieServiceMockCalls = deleteMovieServiceMock.getCalls()
 
         expect(deleteMovieServiceMockCalls.length).toEqual(1)
-        expect(deleteMovieServiceMockCalls[0].args[0]).toEqual(movieId)
+        expect(deleteMovieServiceMockCalls[0].args[0]).toEqual({movieId: movieId})
     })
 
     it('dispatches "MOVIE__DELETE__DONE" action after successfull service function call', (done) => {
@@ -218,13 +218,13 @@ describe('"editMovie" action creator', () => {
         }
         const editMovieServiceMock = sinon.spy(() => Promise.resolve())
 
-        const thunkAction = editMovie({ movieInfo, __editMovieService: editMovieServiceMock })
+        const thunkAction = editMovie({ movieInfo: movieInfo, __editMovieService: editMovieServiceMock })
         thunkAction(Function.prototype)
 
         const editMovieServiceMockCalls = editMovieServiceMock.getCalls()
 
         expect(editMovieServiceMockCalls.length).toEqual(1)
-        expect(editMovieServiceMockCalls[0].args[0]).toEqual(movieInfo)
+        expect(editMovieServiceMockCalls[0].args[0]).toEqual({movieInfo: movieInfo})
     })
 
     it('dispatches "MOVIE__DELETE__DONE" action after successfull service function call', (done) => {
@@ -284,13 +284,13 @@ describe('"getMovie" action creator', () => {
         const movieId = 'foobar'
         const getMovieServiceMock = sinon.spy(() => Promise.resolve())
 
-        const thunkAction = getMovie({ movieId, __getMovieService: getMovieServiceMock })
+        const thunkAction = getMovie({ movieId: movieId, __getMovieService: getMovieServiceMock })
         thunkAction(Function.prototype)
 
         const getMovieServiceMockCalls = getMovieServiceMock.getCalls()
 
         expect(getMovieServiceMockCalls.length).toEqual(1)
-        expect(getMovieServiceMockCalls[0].args[0]).toEqual(movieId)
+        expect(getMovieServiceMockCalls[0].args[0]).toEqual({movieId: movieId})
     })
 
     it('dispatches "MOVIE__GET__DONE" action after successfull service function call', (done) => {
