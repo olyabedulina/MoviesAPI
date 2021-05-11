@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Components :: Multiselect snapshots: Test :: "Multiselect component 1`] = `
+<div
+  className="  dropdown "
+>
+  <div
+    className="dropdownInput"
+  >
+    <div
+      className="dropdownPlaceholder"
+    >
+      foo
+    </div>
+    <div
+      className="dropdownInputButton dropdownInputButtonUp"
+      onClick={[Function]}
+    />
+  </div>
+</div>
+`;
+
+exports[`Components :: Multiselect snapshots: Test :: "Multiselect component 2`] = `
+<div
+  className="  dropdown "
+>
+  <div
+    className="dropdownInput"
+  >
+    <div
+      className="dropdownPlaceholder"
+    >
+      foo
+    </div>
+    <div
+      className="dropdownInputButton dropdownInputButtonUp"
+      onClick={[Function]}
+    />
+  </div>
+</div>
+`;
+
+exports[`Components :: Multiselect snapshots: Test :: "Multiselect component 3`] = `
+<div
+  className="  dropdown "
+>
+  <div
+    className="dropdownInput"
+  >
+    <div
+      className="dropdownPlaceholder"
+    >
+      foo, foo
+    </div>
+    <div
+      className="dropdownInputButton dropdownInputButtonUp"
+      onClick={[Function]}
+    />
+  </div>
+</div>
+`;
+
+exports[`Components :: Multiselect snapshots: Test :: "Multiselect component 4`] = `
+<div
+  className="  dropdown "
+>
+  <div
+    className="dropdownInput"
+  >
+    <div
+      className="dropdownPlaceholder"
+    >
+      foo
+    </div>
+    <div
+      className="dropdownInputButton dropdownInputButtonUp"
+      onClick={[Function]}
+    />
+  </div>
+</div>
+`;

@@ -120,26 +120,6 @@ export function sortMoviesBy(sortBy, sortOrder) {
     }
 }
 
-export function filterMoviesBy(filters, movieFilterID) {
-    return (dispatch) => {
-        dispatch({
-            type: 'MOVIES__FILTER__INIT'
-        })
-
-        loadMoviesService({filters: filters}).then((moviesData) => {
-            dispatch({
-                type: 'MOVIES__FILTER__DONE',
-                payload:
-                    {
-                        moviesData: moviesData,
-                        movieFilterID: movieFilterID,
-                        filters: filters
-                    }
-            })
-        })
-    }
-}
-
 export function sortAndFilterMoviesBy(sortBy, sortOrder, filters, movieFilterID, searchQuery) {
     return (dispatch) => {
         dispatch({
