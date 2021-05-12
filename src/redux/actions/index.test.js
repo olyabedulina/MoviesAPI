@@ -6,7 +6,8 @@ import {
     addMovie,
     deleteMovie,
     editMovie,
-    getMovie
+    getMovie,
+    sortMoviesBy
 } from './index'
 
 //
@@ -317,4 +318,61 @@ describe('"getMovie" action creator', () => {
         })
     })
 
+})
+
+describe('"sortMoviesBy" action creator', () => {
+
+    it('dispatches "MOVIES__SORT__INIT" action', () => {
+        const dispatch = sinon.spy()
+        const loadMoviesServiceMock = () => Promise.resolve()
+
+        const thunkAction = sortMoviesBy({ __loadMoviesService: loadMoviesServiceMock })
+        thunkAction(dispatch)
+
+        const dispatchCalls = dispatch.getCalls()
+
+        expect(dispatchCalls.length).toEqual(1)
+        expect(dispatchCalls[0].args[0]).toEqual({
+            type: 'MOVIES__SORT__INIT'
+        })
+    })
+
+    it('calls service function with correct params', () => {
+        const loadMoviesServiceMock = sinon.spy(() => Promise.resolve())
+        const sortBy = 'foo'
+        const sortOrder = 'asc'
+
+        const thunkAction = sortMoviesBy({sortBy, sortOrder, __loadMoviesService: loadMoviesServiceMock })
+        thunkAction(Function.prototype)
+
+        const loadMoviesServiceMockCalls = loadMoviesServiceMock.getCalls()
+
+        expect(loadMoviesServiceMockCalls.length).toEqual(1)
+        expect(loadMoviesServiceMockCalls[0].args[0]).toEqual({sortBy: sortBy, sortOrder: sortOrder})
+    })
+
+    it('dispatches "MOVIES__LOAD__DONE" action after successfull service function call', (done) => {
+        const sortBy = 'foo'
+        const sortOrder = 'asc'
+        const moviesData = {}
+
+        const dispatch = sinon.spy()
+        const loadMoviesServiceMock = () => Promise.resolve(moviesData)
+
+        const thunkAction = sortMoviesBy({ sortBy, sortOrder, __loadMoviesService: loadMoviesServiceMock })
+        thunkAction(dispatch).then(() => {
+            const dispatchCalls = dispatch.getCalls()
+
+            expect(dispatchCalls.length).toEqual(2)
+            expect(dispatchCalls[1].args[0]).toEqual({
+                type: 'MOVIES__SORT__DONE',
+                payload: {
+                    moviesData,
+                    sortBy,
+                    sortOrder
+                }
+            })
+            done()
+        })
+    })
 })

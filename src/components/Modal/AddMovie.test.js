@@ -9,8 +9,6 @@ import renderer from 'react-test-renderer';
 const mockStore = configureStore([]);
 
 import AddMovie from "./AddMovie";
-import Button from "../Button";
-import Input from "../Input";
 
 describe('Components :: Add Movie unit tests:', () => {
 
@@ -25,6 +23,11 @@ describe('Components :: Add Movie unit tests:', () => {
             </Provider>
         );
     });
+
+    test('type', () => {
+        userEvent.type(screen.getByRole('textbox', {name: /title/i}), 'Hello, World!')
+        expect(screen.getByRole('textbox', {name: /title/i})).toHaveValue('Hello, World!')
+    })
 
     test('Clear title input', () => {
         userEvent.clear(screen.getByRole('textbox', {name: /title/i}))
@@ -77,65 +80,6 @@ describe('Components :: Add Movie unit tests:', () => {
         const actual = renderer
             .create(<Provider store={store}>
                 <AddMovie />
-            </Provider>)
-            .toJSON();
-        expect(actual).toMatchSnapshot();
-    });
-
-    it('Snapshot Test :: "AddMovie" component', () => {
-        let store = mockStore({ movieList: [ { B: 'B'}, { C: 'C'}] });
-
-        const actual = renderer
-            .create(<Provider store={store}>
-                <AddMovie>foo</AddMovie>
-            </Provider>)
-            .toJSON();
-        expect(actual).toMatchSnapshot();
-    });
-
-    it('Snapshot Test :: "AddMovie" component', () => {
-        let store = mockStore({ movieList: [ { B: 'B'}, { C: 'C'}] });
-
-        const actual = renderer
-            .create(<Provider store={store}>
-                <AddMovie>
-                    <Button kind="aux" className="buttonAddMovie">+ Add Movie</Button>
-                </AddMovie>
-            </Provider>)
-            .toJSON();
-        expect(actual).toMatchSnapshot();
-    });
-
-    it('Snapshot Test :: "AddMovie" component', () => {
-        let store = mockStore({ movieList: [ { B: 'B'}, { C: 'C'}], movieId: '1'});
-
-        const actual = renderer
-            .create(<Provider store={store}>
-                <AddMovie>
-                    <input type="text" className="Type text" />
-                    <Button kind="aux" className="buttonAddMovie">Submit data</Button>
-                </AddMovie>
-            </Provider>)
-            .toJSON();
-        expect(actual).toMatchSnapshot();
-    });
-
-    it('Snapshot Test :: "AddMovie" component', () => {
-        let store = mockStore({ movieList: [ { B: 'B'}, { C: 'C'}], movieId: '1'});
-
-        const actual = renderer
-            .create(<Provider store={store}>
-                <AddMovie>
-                    <form className="form">
-                        <Input
-                            className="formInput"
-                            placeholder="What do you want to watch?"
-                            type="text"
-                            value="0"
-                            onChange={() => {}}
-                        />
-                    </form>
-                </AddMovie>
             </Provider>)
             .toJSON();
         expect(actual).toMatchSnapshot();

@@ -100,13 +100,13 @@ export function getMovie({ movieId, __getMovieService = getMovieService }) {
     }
 }
 
-export function sortMoviesBy(sortBy, sortOrder) {
+export function sortMoviesBy({ sortBy, sortOrder, __loadMoviesService = loadMoviesService }) {
     return (dispatch) => {
         dispatch({
             type: 'MOVIES__SORT__INIT'
         })
 
-        loadMoviesService({sortBy: sortBy, sortOrder: sortOrder}).then((moviesData) => {
+        return __loadMoviesService({sortBy: sortBy, sortOrder: sortOrder}).then((moviesData) => {
             dispatch({
                 type: 'MOVIES__SORT__DONE',
                 payload:
