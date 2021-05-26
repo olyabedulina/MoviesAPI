@@ -16,7 +16,9 @@ const DeleteMovie = ({
     const dispatch = useDispatch()
 
     function handleConfirmClick() {
-        dispatch(deleteMovie(item.id))
+        const itemID = item.id
+
+        dispatch(deleteMovie({ movieId: itemID }))
         onModalClose()
     }
 

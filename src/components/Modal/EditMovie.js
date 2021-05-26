@@ -85,7 +85,7 @@ const EditMovie = ({
             genres: genres.filter(({ id }) => (selectedGenres.includes(id))).map(({ name }) => name)
         }
 
-        dispatch(editMovie(updatedMovie))
+        dispatch(editMovie({ movieInfo: updatedMovie }))
     }
 
     const formik = useFormik({

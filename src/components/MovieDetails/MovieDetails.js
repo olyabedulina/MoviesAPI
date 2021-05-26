@@ -15,8 +15,7 @@ const MovieDetails = ({
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log("id = ", movieId)
-        dispatch(getMovie(movieId))
+        dispatch(getMovie({ movieId }))
     }, [])
 
     const movie = useSelector(getCurrentMovie)

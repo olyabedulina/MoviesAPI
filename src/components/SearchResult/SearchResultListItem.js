@@ -32,8 +32,7 @@ const SearchResultListItem = ({
     }
 
     function handleMovieImageClick() {
-        // onMovieImageClick(data.id)
-        dispatch(getMovie(data.id))
+        dispatch(getMovie({ movieId: data.id }))
     }
 
     function handleMovieEditClick() {

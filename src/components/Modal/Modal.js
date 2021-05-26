@@ -10,6 +10,8 @@ const Modal = ({
     onModalClose = Function.prototype
 }) => {
 
+    const defaultPlaceholder = document.createElement('div')
+
     function handleCloseButtonClick(event) {
         event.preventDefault();
         onModalClose();
@@ -17,14 +19,14 @@ const Modal = ({
 
     return createPortal(<>
         <div className={CM.modalOverlay}></div>
-        <div className={CM.modal}>
+        <div data-testid="modal" className={CM.modal}>
             <div className={CM.modalTitle}>{title}</div>
-            <a href="#" className={CM.modalClose} onClick={handleCloseButtonClick}>&#10005;</a>
+            <a data-testid="modalClose" href="#" className={CM.modalClose} onClick={handleCloseButtonClick}>&#10005;</a>
             <div className={CM.modalContainer}>
                 {children}
             </div>
         </div>
-    </>, document.getElementById("app"))
+    </>, document.getElementById("app") || defaultPlaceholder)
 }
 
 Modal.propTypes = {

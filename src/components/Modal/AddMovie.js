@@ -23,7 +23,7 @@ const AddMovie = ({
     const [selectedGenresError, setSelectedGenresError] = useState(false)
     const [movieIsSaved, setMovieIsSaved] = useState(false)
 
-    const genres = useSelector(getFilterItems)
+    const genres = useSelector(getFilterItems) || []
     const dispatch = useDispatch()
 
     function handleSelectedGenresChange(nextSelectedGenres) {
@@ -53,9 +53,7 @@ const AddMovie = ({
             genres: genres.filter(({ id }) => (selectedGenres.includes(id))).map(({ name }) => name)
         }
 
-        console.log("newMovie = ", newMovie)
-
-        dispatch(addMovie(newMovie))
+        dispatch(addMovie({ movieInfo: newMovie }))
         setMovieIsSaved(true)
     }
 
@@ -91,7 +89,7 @@ const AddMovie = ({
     });
 
     return (!movieIsSaved) ? <form onSubmit={formik.handleSubmit}>
-                <div className={CM.modalContainerItem}>
+                <div data-testid="modalContainerItem" className={CM.modalContainerItem}>
                     <h3>Add movie</h3>
                 </div>
                 <div className={CM.modalContainerItem}>
@@ -210,7 +208,7 @@ const AddMovie = ({
                         </label>
                     </div>
                 </div>
-                <div className={CM.modalFooter}>
+                <div data-testid="formButtons" className={CM.modalFooter}>
                     <Button
                         kind='alt'
                         className={CM.modalFooterButton}
