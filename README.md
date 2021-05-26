@@ -3,22 +3,22 @@
 
 ---
 #### Get started
-> Before running an application you should clone and run Movies database server. GitHub Repository with Service implementation:
+> Before running an application you should clone and run Movies DB database.. GitHub Repository with database implementation:
 https://github.com/VarvaraZadnepriak/MoviesAPI.ReactJS
-To start local Movies API dababase, you should:
-> 1. Clone Movies API Service repository
+To start local Movies DB dababase, you should:
+> 1. Clone MoviesAPI.ReactJS repository
 > 2. Run the following command to install node modules:
 ```sh
 npm i
 ```
-> 3. Run the following command to start Movies API Service:
+> 3. Run the following command to start MoviesAPI.ReactJS:
  ```sh
 npm start
 ```
-> Movies API Database will be available on http://localhost:4000/.
+> Movies DB Database will be available on http://localhost:4000/.
 > API Swagger documentation will be available on http://localhost:4000/api-docs.
 
-#### Come back to current MoviesAPI service. 
+#### Come back to current MoviesAPI Service. 
 > Install the dependencies and devDependencies and start the server.
 
 ```sh
@@ -39,4 +39,4 @@ npm run serve
 ```sh
 npm run test
 ```
-> MoviesAPI service will be available on http://localhost:7070/.
+> MoviesAPI Service will be available on http://localhost:7070/.
